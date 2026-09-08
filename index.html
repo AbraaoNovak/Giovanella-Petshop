@@ -1,0 +1,1037 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#294908" />
+
+    <!-- ==================================================================
+         SEO — TODO: REVISAR TEXTOS APÓS RECEBER CONTEÚDO OFICIAL
+         ================================================================== -->
+    <title>Giovanella Escola Estética Animal | Cursos de Estética Animal em Joinville - SC</title>
+    <meta
+      name="description"
+      content="Escola de estética animal em Joinville (SC). Cursos de estética animal e banho e tosa, com formação profissional e estrutura preparada. Fale conosco pelo WhatsApp."
+    />
+    <link rel="canonical" href="https://www.giovanellaesteticaanimal.com.br/" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="author" content="Giovanella Escola Estética Animal" />
+    <meta name="geo.region" content="BR-SC" />
+    <meta name="geo.placename" content="Joinville" />
+
+    <!-- Open Graph / redes sociais -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Giovanella Escola Estética Animal" />
+    <meta
+      property="og:title"
+      content="Giovanella Escola Estética Animal | Cursos em Joinville - SC"
+    />
+    <meta
+      property="og:description"
+      content="Escola de estética animal em Joinville (SC). Cursos de estética animal e banho e tosa. Fale conosco pelo WhatsApp."
+    />
+    <meta property="og:url" content="https://www.giovanellaesteticaanimal.com.br/" />
+    <!-- TODO: SUBSTITUIR POR IMAGEM SOCIAL REAL 1200x630 (public/img/og-image.jpg) -->
+    <meta
+      property="og:image"
+      content="https://www.giovanellaesteticaanimal.com.br/img/Logo-Giovanella.png"
+    />
+    <meta property="og:image:alt" content="Logotipo da Giovanella Escola Estética Animal" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Ícones -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <!-- TODO: GERAR ÍCONES PNG (apple-touch-icon 180x180) A PARTIR DE UMA VERSÃO QUADRADA DA LOGO -->
+
+    <!-- Fontes: preconnect reduz o custo de handshake; `display=swap` evita
+         texto invisível (FOIT) e protege o LCP. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;600;700&display=swap"
+    />
+
+    <script type="module" src="/src/js/main.js"></script>
+
+    <!-- ==================================================================
+         DADOS ESTRUTURADOS (Schema.org)
+         Apenas schemas efetivamente aplicáveis ao conteúdo real.
+         NÃO é usado AggregateRating: o site não possui avaliações reais
+         publicadas e elegíveis.
+         TODO: Adicionar `openingHoursSpecification` e `postalCode` quando
+         as informações oficiais forem fornecidas.
+         TODO: Adicionar schema `Course` SOMENTE após os cursos reais serem
+         cadastrados (não publicar dados de cursos fictícios).
+         ================================================================== -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://www.giovanellaesteticaanimal.com.br/#website",
+            "url": "https://www.giovanellaesteticaanimal.com.br/",
+            "name": "Giovanella Escola Estética Animal",
+            "inLanguage": "pt-BR",
+            "publisher": { "@id": "https://www.giovanellaesteticaanimal.com.br/#business" }
+          },
+          {
+            "@type": ["PetStore", "EducationalOrganization"],
+            "@id": "https://www.giovanellaesteticaanimal.com.br/#business",
+            "name": "Giovanella Escola Estética Animal",
+            "url": "https://www.giovanellaesteticaanimal.com.br/",
+            "logo": "https://www.giovanellaesteticaanimal.com.br/img/Logo-Giovanella.png",
+            "image": "https://www.giovanellaesteticaanimal.com.br/img/Logo-Giovanella.png",
+            "telephone": "+5547996086955",
+            "areaServed": {
+              "@type": "City",
+              "name": "Joinville",
+              "containedInPlace": { "@type": "State", "name": "Santa Catarina" }
+            },
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Rua Elly Soares, 511",
+              "addressLocality": "Joinville",
+              "addressRegion": "SC",
+              "addressCountry": "BR"
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Pular para o conteúdo principal</a>
+
+    <!-- ==================================================================
+         HEADER
+         ================================================================== -->
+    <header class="header" data-header>
+      <div class="container header__inner">
+        <a class="header__brand" href="#inicio" aria-label="Giovanella Escola Estética Animal — ir para o início">
+          <img
+            class="header__logo"
+            src="/img/Logo-Giovanella.png"
+            alt="Giovanella Escola Estética Animal"
+            width="331"
+            height="100"
+            fetchpriority="high"
+          />
+        </a>
+
+        <nav class="nav" aria-label="Navegação principal">
+          <a class="nav__link" href="#inicio" data-nav-link>Início</a>
+          <a class="nav__link" href="#sobre" data-nav-link>Sobre a escola</a>
+          <a class="nav__link" href="#cursos" data-nav-link>Cursos</a>
+          <a class="nav__link" href="#contato" data-nav-link>Contato</a>
+          <a class="nav__link" href="#depoimentos" data-nav-link>Depoimentos</a>
+          <!-- O rótulo abaixo vem de site.config.js → labels.sponsorship -->
+          <a class="nav__link" href="#patriocinio" data-nav-link data-config="labels.sponsorship"
+            >Patriocinio</a
+          >
+        </nav>
+
+        <div class="header__actions">
+          <a
+            class="btn btn--whatsapp header__cta"
+            data-wa="default"
+            data-track="whatsapp_clique"
+            data-track-label="header"
+            href="https://wa.me/5547996086955"
+          >
+            <svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.53.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.38-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35zM12.04 21.5h-.01a9.45 9.45 0 0 1-4.8-1.32l-.35-.2-3.57.93.96-3.48-.23-.36a9.4 9.4 0 0 1-1.44-5.03c0-5.2 4.24-9.44 9.45-9.44 2.52 0 4.89.99 6.67 2.77a9.38 9.38 0 0 1 2.76 6.68c0 5.2-4.24 9.45-9.44 9.45zM20.5 3.49A11.8 11.8 0 0 0 12.04 0C5.5 0 .18 5.32.18 11.85c0 2.09.55 4.13 1.59 5.93L.08 24l6.37-1.67a11.83 11.83 0 0 0 5.59 1.42h.01c6.53 0 11.85-5.32 11.85-11.85 0-3.17-1.23-6.14-3.4-8.41z"
+              />
+            </svg>
+            Fale conosco
+          </a>
+
+          <button
+            class="hamburger"
+            type="button"
+            data-menu-toggle
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+            aria-label="Abrir menu de navegação"
+          >
+            <span class="hamburger__bar"></span>
+            <span class="hamburger__bar"></span>
+            <span class="hamburger__bar"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ==================================================================
+         MENU MOBILE
+         ================================================================== -->
+    <div class="mobile-menu" id="mobile-menu" data-menu>
+      <button
+        class="mobile-menu__backdrop"
+        type="button"
+        data-menu-backdrop
+        tabindex="-1"
+        aria-label="Fechar menu"
+      ></button>
+
+      <div class="mobile-menu__panel" data-menu-panel role="dialog" aria-modal="true" aria-label="Menu de navegação">
+        <nav aria-label="Navegação mobile">
+          <ul class="mobile-menu__list">
+            <li><a class="mobile-menu__link" href="#inicio">Início</a></li>
+            <li><a class="mobile-menu__link" href="#sobre">Sobre a escola</a></li>
+            <li><a class="mobile-menu__link" href="#cursos">Cursos</a></li>
+            <li><a class="mobile-menu__link" href="#contato">Contato</a></li>
+            <li><a class="mobile-menu__link" href="#depoimentos">Depoimentos</a></li>
+            <li>
+              <a class="mobile-menu__link" href="#patriocinio" data-config="labels.sponsorship"
+                >Patriocinio</a
+              >
+            </li>
+          </ul>
+        </nav>
+
+        <div class="mobile-menu__actions">
+          <a
+            class="btn btn--whatsapp btn--block"
+            data-wa="default"
+            data-track="whatsapp_clique"
+            data-track-label="menu_mobile"
+            href="https://wa.me/5547996086955"
+            >Falar no WhatsApp</a
+          >
+          <a
+            class="btn btn--secondary btn--block"
+            data-tel
+            data-track="telefone_clique"
+            data-track-label="menu_mobile"
+            href="tel:+5547996086955"
+            >Ligar: <span data-config="contact.phoneDisplay">(47) 99608-6955</span></a
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- data-paw-seams: o JS cria uma trilha de pegadas em cada emenda
+         entre as seções filhas deste elemento (Experimento 1). -->
+    <main id="main" data-paw-seams>
+      <!-- ================================================================
+           INÍCIO / HERO
+           ================================================================ -->
+      <section class="hero" id="inicio" aria-labelledby="hero-title">
+        <div class="container hero__grid">
+          <div>
+            <p class="section__eyebrow" data-reveal>Joinville · Santa Catarina</p>
+
+            <h1 class="hero__title" id="hero-title" data-reveal>
+              Formação profissional em <em>estética animal</em> com cuidado de verdade
+            </h1>
+
+            <p class="hero__subtitle" data-reveal>
+              <!-- TODO: SUBSTITUIR TEXTO — subheadline oficial da escola -->
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo cursus magna
+              vel scelerisque nisl consectetur et. Aenean lacinia bibendum nulla sed consectetur.
+              <span class="placeholder-note">TODO: substituir texto</span>
+            </p>
+
+            <div class="hero__actions" data-reveal>
+              <a class="btn btn--primary" href="#cursos" data-track="cta_clique" data-track-label="hero_cursos">
+                Conheça nossos cursos
+              </a>
+              <a
+                class="btn btn--whatsapp"
+                data-wa="default"
+                data-track="whatsapp_clique"
+                data-track-label="hero"
+                href="https://wa.me/5547996086955"
+              >
+                <svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.53.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.38-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35zM12.04 21.5h-.01a9.45 9.45 0 0 1-4.8-1.32l-.35-.2-3.57.93.96-3.48-.23-.36a9.4 9.4 0 0 1-1.44-5.03c0-5.2 4.24-9.44 9.45-9.44 2.52 0 4.89.99 6.67 2.77a9.38 9.38 0 0 1 2.76 6.68c0 5.2-4.24 9.45-9.44 9.45zM20.5 3.49A11.8 11.8 0 0 0 12.04 0C5.5 0 .18 5.32.18 11.85c0 2.09.55 4.13 1.59 5.93L.08 24l6.37-1.67a11.83 11.83 0 0 0 5.59 1.42h.01c6.53 0 11.85-5.32 11.85-11.85 0-3.17-1.23-6.14-3.4-8.41z"
+                  />
+                </svg>
+                Fale conosco
+              </a>
+            </div>
+
+            <!-- Indicadores de confiança.
+                 Só há afirmações verificáveis aqui; os demais estão marcados
+                 como pendentes para evitar informação comercial inventada. -->
+            <ul class="trust" data-reveal>
+              <li class="trust__item">
+                <svg class="trust__icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z" />
+                </svg>
+                <span>
+                  <span class="trust__label">Joinville · Bairro Floresta</span>
+                  <span class="trust__desc">Rua Elly Soares, 511</span>
+                </span>
+              </li>
+              <li class="trust__item">
+                <svg class="trust__icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M20 15.5a11.36 11.36 0 0 1-3.57-.57 1 1 0 0 0-1.02.24l-2.2 2.2a15.05 15.05 0 0 1-6.59-6.59l2.2-2.2a1 1 0 0 0 .25-1.02A11.36 11.36 0 0 1 8.5 4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1 17 17 0 0 0 17 17 1 1 0 0 0 1-1v-3.5a1 1 0 0 0-1-1z" />
+                </svg>
+                <span>
+                  <span class="trust__label">Atendimento direto</span>
+                  <span class="trust__desc">WhatsApp e telefone</span>
+                </span>
+              </li>
+              <li class="trust__item">
+                <svg class="trust__icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 3 1 8l11 5 9-4.09V17h2V8L12 3zM5 13.18v3.51L12 20l7-3.31v-3.51l-7 3.18-7-3.18z" />
+                </svg>
+                <span>
+                  <span class="trust__label">Formação prática</span>
+                  <span class="trust__desc">
+                    <span class="placeholder-note">TODO: dado real</span>
+                  </span>
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="hero__media" data-reveal>
+            <!-- TODO: INSERIR FOTO REAL — fachada ou atendimento (formato retrato,
+                 idealmente 1000x1200, exportada em WebP/AVIF).
+                 Ao inserir, adicione <img src="/img/hero.webp" alt="..." width height>
+                 dentro do bloco abaixo: o placeholder fica coberto automaticamente. -->
+            <div class="media-placeholder">
+              <svg class="media-placeholder__icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M21 5H3a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 12H3l4.5-6 3 4 3.5-4.5L21 17z" />
+              </svg>
+              <strong>TODO: INSERIR FOTO DA FACHADA</strong>
+              <span>Formato retrato · WebP · 1000&times;1200</span>
+            </div>
+
+            <div class="hero__badge">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z" />
+              </svg>
+              <span>
+                <strong>Estética animal</strong><br />
+                <span class="trust__desc">Cursos e serviços em Joinville</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           SOBRE A ESCOLA
+           ================================================================ -->
+      <section class="section section--alt" id="sobre" aria-labelledby="sobre-title">
+        <div class="container about__grid">
+          <div>
+            <p class="section__eyebrow" data-reveal>Sobre a escola</p>
+            <h2 id="sobre-title" data-reveal>Uma escola feita para quem leva o cuidado a sério</h2>
+
+            <p class="section__lead" data-reveal>
+              <!-- TODO: INSERIR HISTÓRIA DA ESCOLA -->
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur blandit tempus
+              porttitor. Nullam quis risus eget urna mollis ornare vel eu leo. Donec ullamcorper
+              nulla non metus auctor fringilla.
+              <span class="placeholder-note">TODO: história da escola</span>
+            </p>
+
+            <div class="values">
+              <div class="value" data-reveal>
+                <div class="value__icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 21s-7.5-4.6-9.3-9A5.3 5.3 0 0 1 12 6.6 5.3 5.3 0 0 1 21.3 12c-1.8 4.4-9.3 9-9.3 9z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="value__title">Missão</h3>
+                  <p class="value__text">
+                    <!-- TODO: INSERIR MISSÃO -->
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id ligula
+                    porta felis euismod semper.
+                  </p>
+                </div>
+              </div>
+
+              <div class="value" data-reveal>
+                <div class="value__icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1.2 14.4L7 11.6l1.4-1.4 2.4 2.4 5-5L17.2 9l-6.4 6.4z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="value__title">Valores</h3>
+                  <p class="value__text">
+                    <!-- TODO: INSERIR VALORES -->
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a
+                    ante venenatis dapibus.
+                  </p>
+                </div>
+              </div>
+
+              <div class="value" data-reveal>
+                <div class="value__icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 3 1 8l11 5 9-4.09V17h2V8L12 3zM5 13.18v3.51L12 20l7-3.31v-3.51l-7 3.18-7-3.18z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="value__title">Formação profissional</h3>
+                  <p class="value__text">
+                    <!-- TODO: INSERIR DIFERENCIAIS / EXPERIÊNCIA / ESTRUTURA -->
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras justo odio,
+                    dapibus ac facilisis in.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mosaico de imagens da estrutura.
+               TODO: INSERIR FOTO DA ESTRUTURA / SALA DE AULA / EQUIPE /
+               ANIMAIS / EQUIPAMENTOS — substituir cada placeholder por <img>. -->
+          <div class="about__gallery" data-reveal>
+            <div class="media-placeholder">
+              <strong>TODO: FOTO DA ESTRUTURA</strong>
+              <span>16:9 · WebP</span>
+            </div>
+            <div class="media-placeholder">
+              <strong>TODO: SALA DE AULA</strong>
+              <span>1:1</span>
+            </div>
+            <div class="media-placeholder">
+              <strong>TODO: EQUIPE</strong>
+              <span>1:1</span>
+            </div>
+            <div class="media-placeholder">
+              <strong>TODO: EQUIPAMENTOS</strong>
+              <span>1:1</span>
+            </div>
+            <div class="media-placeholder">
+              <strong>TODO: ANIMAIS ATENDIDOS</strong>
+              <span>1:1</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           CURSOS
+           Cada card segue exatamente a mesma estrutura — para adicionar um
+           curso, duplique um <article class="card course-card"> e atualize
+           o texto e o atributo data-course do botão.
+           IMPORTANTE: os cursos abaixo são TEMPORÁRIOS. Nenhum curso real
+           foi inventado.
+           ================================================================ -->
+      <section class="section" id="cursos" aria-labelledby="cursos-title">
+        <div class="container">
+          <div class="section__header section__header--center">
+            <p class="section__eyebrow" data-reveal>Cursos</p>
+            <h2 id="cursos-title" data-reveal>Cursos de estética animal e banho e tosa</h2>
+            <p class="section__lead" data-reveal>
+              <!-- TODO: INSERIR CURSOS REAIS -->
+              Os cursos abaixo são exemplos de estrutura. Substitua nome, descrição, carga horária,
+              modalidade e público-alvo pelas informações oficiais da escola.
+              <span class="placeholder-note">TODO: inserir cursos reais</span>
+            </p>
+          </div>
+
+          <div class="grid">
+            <!-- ---------- Course Card 1 ---------- -->
+            <article class="card course-card" data-reveal>
+              <div class="course-card__media">
+                <!-- TODO: INSERIR FOTO DO CURSO 1 -->
+                <span class="sr-only">Imagem ilustrativa do curso</span>
+              </div>
+              <div class="card__body">
+                <span class="placeholder-note">TODO: curso real</span>
+                <h3 class="card__title">Curso 01 — Nome do curso</h3>
+                <p class="card__text">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id elit non mi
+                  porta gravida at eget metus.
+                </p>
+                <ul class="course-card__list">
+                  <li>Conteúdo programático — TODO</li>
+                  <li>Diferencial do curso — TODO</li>
+                  <li>Público-alvo — TODO</li>
+                </ul>
+                <div class="course-card__meta">
+                  <span class="tag">Carga horária: TODO</span>
+                  <span class="tag">Modalidade: TODO</span>
+                </div>
+                <div class="course-card__footer">
+                  <a
+                    class="btn btn--whatsapp btn--block"
+                    data-wa="course"
+                    data-course="Curso 01 — Nome do curso"
+                    data-track="curso_interesse"
+                    data-track-label="curso_01"
+                    href="https://wa.me/5547996086955"
+                    >Tenho interesse</a
+                  >
+                </div>
+              </div>
+            </article>
+
+            <!-- ---------- Course Card 2 ---------- -->
+            <article class="card course-card" data-reveal>
+              <div class="course-card__media">
+                <span class="sr-only">Imagem ilustrativa do curso</span>
+              </div>
+              <div class="card__body">
+                <span class="placeholder-note">TODO: curso real</span>
+                <h3 class="card__title">Curso 02 — Nome do curso</h3>
+                <p class="card__text">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas faucibus mollis
+                  interdum, nulla vitae elit libero.
+                </p>
+                <ul class="course-card__list">
+                  <li>Conteúdo programático — TODO</li>
+                  <li>Diferencial do curso — TODO</li>
+                  <li>Público-alvo — TODO</li>
+                </ul>
+                <div class="course-card__meta">
+                  <span class="tag">Carga horária: TODO</span>
+                  <span class="tag">Modalidade: TODO</span>
+                </div>
+                <div class="course-card__footer">
+                  <a
+                    class="btn btn--whatsapp btn--block"
+                    data-wa="course"
+                    data-course="Curso 02 — Nome do curso"
+                    data-track="curso_interesse"
+                    data-track-label="curso_02"
+                    href="https://wa.me/5547996086955"
+                    >Tenho interesse</a
+                  >
+                </div>
+              </div>
+            </article>
+
+            <!-- ---------- Course Card 3 ---------- -->
+            <article class="card course-card" data-reveal>
+              <div class="course-card__media">
+                <span class="sr-only">Imagem ilustrativa do curso</span>
+              </div>
+              <div class="card__body">
+                <span class="placeholder-note">TODO: curso real</span>
+                <h3 class="card__title">Curso 03 — Nome do curso</h3>
+                <p class="card__text">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id dolor id nibh
+                  ultricies vehicula ut id elit.
+                </p>
+                <ul class="course-card__list">
+                  <li>Conteúdo programático — TODO</li>
+                  <li>Diferencial do curso — TODO</li>
+                  <li>Público-alvo — TODO</li>
+                </ul>
+                <div class="course-card__meta">
+                  <span class="tag">Carga horária: TODO</span>
+                  <span class="tag">Modalidade: TODO</span>
+                </div>
+                <div class="course-card__footer">
+                  <a
+                    class="btn btn--whatsapp btn--block"
+                    data-wa="course"
+                    data-course="Curso 03 — Nome do curso"
+                    data-track="curso_interesse"
+                    data-track-label="curso_03"
+                    href="https://wa.me/5547996086955"
+                    >Tenho interesse</a
+                  >
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           CONTATO
+           ================================================================ -->
+      <section class="section section--alt" id="contato" aria-labelledby="contato-title">
+        <div class="container">
+          <div class="section__header">
+            <p class="section__eyebrow" data-reveal>Contato</p>
+            <h2 id="contato-title" data-reveal>Fale com a Giovanella</h2>
+            <p class="section__lead" data-reveal>
+              O atendimento acontece por WhatsApp e telefone. Prefira o WhatsApp para respostas mais
+              rápidas sobre cursos, turmas e serviços.
+            </p>
+          </div>
+
+          <div class="contact__grid">
+            <div>
+              <div class="contact__channels">
+                <a
+                  class="channel channel--whatsapp"
+                  data-wa="default"
+                  data-track="whatsapp_clique"
+                  data-track-label="contato"
+                  href="https://wa.me/5547996086955"
+                  data-reveal
+                >
+                  <span class="channel__icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path
+                        d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.53.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.38-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35zM12.04 21.5h-.01a9.45 9.45 0 0 1-4.8-1.32l-.35-.2-3.57.93.96-3.48-.23-.36a9.4 9.4 0 0 1-1.44-5.03c0-5.2 4.24-9.44 9.45-9.44 2.52 0 4.89.99 6.67 2.77a9.38 9.38 0 0 1 2.76 6.68c0 5.2-4.24 9.45-9.44 9.45zM20.5 3.49A11.8 11.8 0 0 0 12.04 0C5.5 0 .18 5.32.18 11.85c0 2.09.55 4.13 1.59 5.93L.08 24l6.37-1.67a11.83 11.83 0 0 0 5.59 1.42h.01c6.53 0 11.85-5.32 11.85-11.85 0-3.17-1.23-6.14-3.4-8.41z"
+                      />
+                    </svg>
+                  </span>
+                  <span>
+                    <span class="channel__label">WhatsApp</span>
+                    <span class="channel__value" data-config="contact.phoneDisplay">(47) 99608-6955</span>
+                    <span class="channel__note">Canal preferencial de atendimento</span>
+                  </span>
+                </a>
+
+                <a
+                  class="channel"
+                  data-tel
+                  data-track="telefone_clique"
+                  data-track-label="contato"
+                  href="tel:+5547996086955"
+                  data-reveal
+                >
+                  <span class="channel__icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M20 15.5a11.36 11.36 0 0 1-3.57-.57 1 1 0 0 0-1.02.24l-2.2 2.2a15.05 15.05 0 0 1-6.59-6.59l2.2-2.2a1 1 0 0 0 .25-1.02A11.36 11.36 0 0 1 8.5 4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1 17 17 0 0 0 17 17 1 1 0 0 0 1-1v-3.5a1 1 0 0 0-1-1z" />
+                    </svg>
+                  </span>
+                  <span>
+                    <span class="channel__label">Telefone</span>
+                    <span class="channel__value" data-config="contact.phoneDisplay">(47) 99608-6955</span>
+                    <span class="channel__note">Toque para ligar</span>
+                  </span>
+                </a>
+
+                <div class="channel" data-reveal>
+                  <span class="channel__icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z" />
+                    </svg>
+                  </span>
+                  <span>
+                    <span class="channel__label">Endereço</span>
+                    <address class="channel__value" style="font-style: normal">
+                      Rua Elly Soares, 511
+                    </address>
+                    <span class="channel__note">Bairro Floresta · Joinville - SC</span>
+                  </span>
+                </div>
+              </div>
+
+              <!-- ---------- Google Maps (carregado sob demanda) ---------- -->
+              <div class="map" data-map data-reveal>
+                <button class="map__facade" type="button" data-map-facade>
+                  <svg class="map__pin" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z" />
+                  </svg>
+                  <strong>Ver a localização no mapa</strong>
+                  <span class="channel__note">
+                    O mapa do Google só é carregado após o seu clique.
+                  </span>
+                </button>
+              </div>
+
+              <p style="margin-top: var(--space-sm)">
+                <a
+                  class="btn btn--secondary"
+                  data-directions
+                  data-track="como_chegar_clique"
+                  href="https://www.google.com/maps/dir/?api=1&destination=Rua%20Elly%20Soares%2C%20511%2C%20Bairro%20Floresta%2C%20Joinville%20-%20SC%2C%20Brasil"
+                  >Como chegar</a
+                >
+              </p>
+            </div>
+
+            <!-- ---------- Formulário de interesse ---------- -->
+            <div class="form-card" data-reveal>
+              <h3 style="margin-bottom: var(--space-2xs)">Prefere organizar antes de chamar?</h3>
+              <p class="channel__note" style="margin-bottom: var(--space-md)">
+                Preencha os campos e o WhatsApp abrirá com sua mensagem pronta.
+              </p>
+
+              <!-- `novalidate`: a validação é feita em JS para exibir mensagens
+                   acessíveis e consistentes em todos os navegadores. -->
+              <form class="form" data-interest-form novalidate>
+                <div class="field">
+                  <label class="field__label" for="form-nome">
+                    Nome <span class="field__required" aria-hidden="true">*</span>
+                  </label>
+                  <input
+                    class="field__control"
+                    id="form-nome"
+                    name="nome"
+                    type="text"
+                    maxlength="80"
+                    autocomplete="name"
+                    required
+                    aria-describedby="form-nome-error"
+                  />
+                  <p class="field__error" id="form-nome-error" role="alert"></p>
+                </div>
+
+                <div class="field">
+                  <label class="field__label" for="form-telefone">
+                    Telefone <span class="field__required" aria-hidden="true">*</span>
+                  </label>
+                  <input
+                    class="field__control"
+                    id="form-telefone"
+                    name="telefone"
+                    type="tel"
+                    inputmode="tel"
+                    maxlength="20"
+                    autocomplete="tel"
+                    placeholder="(47) 99999-9999"
+                    required
+                    aria-describedby="form-telefone-error"
+                  />
+                  <p class="field__error" id="form-telefone-error" role="alert"></p>
+                </div>
+
+                <div class="field">
+                  <label class="field__label" for="form-assunto">
+                    Assunto / interesse <span class="field__required" aria-hidden="true">*</span>
+                  </label>
+                  <select
+                    class="field__control"
+                    id="form-assunto"
+                    name="assunto"
+                    required
+                    aria-describedby="form-assunto-error"
+                  >
+                    <option value="">Selecione uma opção</option>
+                    <!-- TODO: AJUSTAR OPÇÕES CONFORME OS CURSOS E SERVIÇOS REAIS -->
+                    <option value="cursos de estética animal">Cursos de estética animal</option>
+                    <option value="curso de banho e tosa">Curso de banho e tosa</option>
+                    <option value="serviços de banho e tosa">Serviços de banho e tosa</option>
+                    <option value="parceria ou patrocínio">Parceria ou patrocínio</option>
+                    <option value="outro assunto">Outro assunto</option>
+                  </select>
+                  <p class="field__error" id="form-assunto-error" role="alert"></p>
+                </div>
+
+                <div class="field">
+                  <label class="field__label" for="form-mensagem">Mensagem</label>
+                  <textarea
+                    class="field__control"
+                    id="form-mensagem"
+                    name="mensagem"
+                    maxlength="600"
+                    aria-describedby="form-mensagem-error form-mensagem-hint"
+                  ></textarea>
+                  <p class="field__counter" data-form-counter aria-hidden="true">0/600</p>
+                  <p class="field__hint" id="form-mensagem-hint">Opcional. Máximo de 600 caracteres.</p>
+                  <p class="field__error" id="form-mensagem-error" role="alert"></p>
+                </div>
+
+                <!-- Honeypot: invisível para pessoas, atrativo para bots. -->
+                <div class="honeypot" aria-hidden="true">
+                  <label for="form-site">Não preencha este campo</label>
+                  <input id="form-site" name="site" type="text" tabindex="-1" autocomplete="off" data-honeypot />
+                </div>
+
+                <button class="btn btn--whatsapp btn--block" type="submit" data-form-submit>
+                  Continuar pelo WhatsApp
+                </button>
+
+                <p class="form__status" data-form-status role="status" aria-live="polite"></p>
+
+                <p class="privacy-note">
+                  Os dados digitados são usados apenas para montar a mensagem enviada ao WhatsApp.
+                  Nada é armazenado neste site e nenhum e-mail é enviado.
+                  <a href="/privacidade.html">Política de Privacidade</a>.
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           DEPOIMENTOS
+           IMPORTANTE: os depoimentos abaixo são EXEMPLOS de layout.
+           Nenhuma avaliação real do Google é exibida ou inventada.
+           ================================================================ -->
+      <section class="section" id="depoimentos" aria-labelledby="depoimentos-title">
+        <div class="container">
+          <div class="section__header section__header--center">
+            <p class="section__eyebrow" data-reveal>Depoimentos</p>
+            <h2 id="depoimentos-title" data-reveal>O que dizem sobre a escola</h2>
+            <p class="section__lead" data-reveal>
+              <!-- TODO: INSERIR DEPOIMENTOS REAIS -->
+              Os cartões abaixo mostram apenas o formato. Substitua por depoimentos reais, com
+              autorização das pessoas citadas.
+              <span class="placeholder-note">TODO: depoimentos reais</span>
+            </p>
+          </div>
+
+          <div class="grid">
+            <!-- ---------- Testimonial Card 1 ---------- -->
+            <article class="testimonial" data-reveal>
+              <span class="placeholder-note">Exemplo — TODO: substituir</span>
+              <div class="testimonial__stars" role="img" aria-label="Exemplo de avaliação: 5 de 5 estrelas">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
+              </div>
+              <blockquote class="testimonial__quote">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque
+                penatibus et magnis dis parturient montes.
+              </blockquote>
+              <div class="testimonial__person">
+                <span class="testimonial__avatar" aria-hidden="true">A</span>
+                <span>
+                  <span class="testimonial__name">TODO: nome do aluno</span><br />
+                  <span class="testimonial__role">TODO: curso ou serviço</span>
+                </span>
+              </div>
+            </article>
+
+            <!-- ---------- Testimonial Card 2 ---------- -->
+            <article class="testimonial" data-reveal>
+              <span class="placeholder-note">Exemplo — TODO: substituir</span>
+              <div class="testimonial__stars" role="img" aria-label="Exemplo de avaliação: 5 de 5 estrelas">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
+              </div>
+              <blockquote class="testimonial__quote">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sagittis lacus vel
+                augue laoreet rutrum faucibus dolor auctor.
+              </blockquote>
+              <div class="testimonial__person">
+                <span class="testimonial__avatar" aria-hidden="true">B</span>
+                <span>
+                  <span class="testimonial__name">TODO: nome do aluno</span><br />
+                  <span class="testimonial__role">TODO: curso ou serviço</span>
+                </span>
+              </div>
+            </article>
+
+            <!-- ---------- Testimonial Card 3 ---------- -->
+            <article class="testimonial" data-reveal>
+              <span class="placeholder-note">Exemplo — TODO: substituir</span>
+              <div class="testimonial__stars" role="img" aria-label="Exemplo de avaliação: 5 de 5 estrelas">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
+              </div>
+              <blockquote class="testimonial__quote">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam porta sem malesuada
+                magna mollis euismod.
+              </blockquote>
+              <div class="testimonial__person">
+                <span class="testimonial__avatar" aria-hidden="true">C</span>
+                <span>
+                  <span class="testimonial__name">TODO: nome do aluno</span><br />
+                  <span class="testimonial__role">TODO: curso ou serviço</span>
+                </span>
+              </div>
+            </article>
+          </div>
+
+          <!-- ============================================================
+               ÁREA RESERVADA PARA AVALIAÇÕES REAIS DO GOOGLE
+               Nenhuma avaliação é exibida enquanto não houver integração
+               oficial. Ver README → "Como integrar avaliações Google".
+               TODO: CONFIGURAR GOOGLE REVIEWS
+               ============================================================ -->
+          <div data-google-reviews hidden></div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           PATRIOCINIO
+           O rótulo é definido em site.config.js → labels.sponsorship
+           ================================================================ -->
+      <section class="section section--alt" id="patriocinio" aria-labelledby="patriocinio-title">
+        <div class="container">
+          <div class="section__header section__header--center">
+            <p class="section__eyebrow" data-reveal data-config="labels.sponsorship">Patriocinio</p>
+            <h2 id="patriocinio-title" data-reveal>Parceiros e apoiadores</h2>
+            <p class="section__lead" data-reveal>
+              <!-- TODO: INSERIR LOGOS DE PATROCINADORES -->
+              Espaço reservado às empresas parceiras e apoiadores da escola.
+              <span class="placeholder-note">TODO: inserir parceiros</span>
+            </p>
+          </div>
+
+          <!-- Para publicar um parceiro, substitua o conteúdo do bloco por:
+               <a class="sponsor" href="URL" target="_blank" rel="noopener noreferrer">
+                 <img src="/img/parceiros/nome.webp" alt="Nome do parceiro" width="200" height="80" />
+               </a> -->
+          <div class="sponsors" data-reveal>
+            <div class="sponsor"><strong>TODO: LOGO PARCEIRO 1</strong><span>PNG/SVG transparente</span></div>
+            <div class="sponsor"><strong>TODO: LOGO PARCEIRO 2</strong><span>PNG/SVG transparente</span></div>
+            <div class="sponsor"><strong>TODO: LOGO PARCEIRO 3</strong><span>PNG/SVG transparente</span></div>
+            <div class="sponsor"><strong>TODO: LOGO PARCEIRO 4</strong><span>PNG/SVG transparente</span></div>
+          </div>
+
+          <p class="sponsor__cta">
+            <a
+              class="btn btn--secondary"
+              data-wa="Olá! Gostaria de conversar sobre parceria/patrocínio com a Giovanella Escola Estética Animal."
+              data-track="cta_clique"
+              data-track-label="patrocinio"
+              href="https://wa.me/5547996086955"
+              >Quero ser parceiro</a
+            >
+          </p>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           CTA FINAL (seção escura — o header inverte automaticamente)
+           ================================================================ -->
+      <section class="section" data-header-theme="dark" aria-labelledby="cta-title">
+        <div class="container">
+          <div class="cta-band" data-reveal>
+            <div>
+              <h2 id="cta-title">Pronto para dar o próximo passo?</h2>
+              <p>
+                Fale agora pelo WhatsApp e tire suas dúvidas sobre cursos, turmas e serviços de
+                estética animal em Joinville.
+              </p>
+            </div>
+            <div class="cta-band__actions">
+              <a
+                class="btn btn--whatsapp"
+                data-wa="default"
+                data-track="whatsapp_clique"
+                data-track-label="cta_final"
+                href="https://wa.me/5547996086955"
+                >Falar no WhatsApp</a
+              >
+              <a
+                class="btn btn--outline-light"
+                data-tel
+                data-track="telefone_clique"
+                data-track-label="cta_final"
+                href="tel:+5547996086955"
+                >Ligar agora</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ==================================================================
+         FOOTER (fundo escuro — o header também inverte aqui)
+         ================================================================== -->
+    <footer class="footer" data-header-theme="dark">
+      <div class="container">
+        <div class="footer__grid">
+          <div>
+            <img
+              class="footer__logo"
+              src="/img/Logo-Giovanella.png"
+              alt="Giovanella Escola Estética Animal"
+              width="331"
+              height="100"
+              loading="lazy"
+            />
+            <p class="footer__list">
+              Escola de estética animal e petshop em Joinville, Santa Catarina.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="footer__title">Navegação</h2>
+            <ul class="footer__list">
+              <li><a href="#inicio">Início</a></li>
+              <li><a href="#sobre">Sobre a escola</a></li>
+              <li><a href="#cursos">Cursos</a></li>
+              <li><a href="#contato">Contato</a></li>
+              <li><a href="#depoimentos">Depoimentos</a></li>
+              <li><a href="#patriocinio" data-config="labels.sponsorship">Patriocinio</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="footer__title">Contato</h2>
+            <ul class="footer__list">
+              <li>
+                <a data-wa="default" data-track="whatsapp_clique" data-track-label="footer" href="https://wa.me/5547996086955">
+                  WhatsApp: <span data-config="contact.phoneDisplay">(47) 99608-6955</span>
+                </a>
+              </li>
+              <li>
+                <a data-tel data-track="telefone_clique" data-track-label="footer" href="tel:+5547996086955">
+                  Telefone: <span data-config="contact.phoneDisplay">(47) 99608-6955</span>
+                </a>
+              </li>
+              <li>
+                <a data-directions data-track="como_chegar_clique" href="https://www.google.com/maps/dir/?api=1&destination=Rua%20Elly%20Soares%2C%20511%2C%20Bairro%20Floresta%2C%20Joinville%20-%20SC%2C%20Brasil">
+                  Como chegar
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="footer__title">Endereço</h2>
+            <address class="footer__list" style="font-style: normal">
+              Rua Elly Soares, 511<br />
+              Bairro Floresta<br />
+              Joinville - SC, Brasil
+            </address>
+          </div>
+        </div>
+
+        <div class="footer__bottom">
+          <span>
+            &copy; <span data-year>2026</span> Giovanella Escola Estética Animal. Todos os direitos
+            reservados.
+          </span>
+          <a href="/privacidade.html">Política de Privacidade</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ==================================================================
+         BOTÃO FLUTUANTE DE WHATSAPP
+         ================================================================== -->
+    <a
+      class="wa-float"
+      data-wa="default"
+      data-track="whatsapp_clique"
+      data-track-label="botao_flutuante"
+      href="https://wa.me/5547996086955"
+      aria-label="Falar com a Giovanella Escola Estética Animal pelo WhatsApp"
+    >
+      <span class="wa-float__tooltip">Fale conosco</span>
+      <svg class="wa-float__icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.53.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.38-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35zM12.04 21.5h-.01a9.45 9.45 0 0 1-4.8-1.32l-.35-.2-3.57.93.96-3.48-.23-.36a9.4 9.4 0 0 1-1.44-5.03c0-5.2 4.24-9.44 9.45-9.44 2.52 0 4.89.99 6.67 2.77a9.38 9.38 0 0 1 2.76 6.68c0 5.2-4.24 9.45-9.44 9.45zM20.5 3.49A11.8 11.8 0 0 0 12.04 0C5.5 0 .18 5.32.18 11.85c0 2.09.55 4.13 1.59 5.93L.08 24l6.37-1.67a11.83 11.83 0 0 0 5.59 1.42h.01c6.53 0 11.85-5.32 11.85-11.85 0-3.17-1.23-6.14-3.4-8.41z"
+        />
+      </svg>
+    </a>
+
+    <!-- ==================================================================
+         CONSENTIMENTO (LGPD)
+         Exibido apenas quando o Google Analytics estiver configurado.
+         ================================================================== -->
+    <aside class="consent" data-consent hidden aria-label="Aviso de privacidade">
+      <strong>Sua privacidade</strong>
+      <p class="consent__text">
+        Usamos cookies de medição (Google Analytics) apenas para entender como o site é usado.
+        Nenhum dado do formulário é armazenado ou enviado por e-mail.
+        <a href="/privacidade.html">Saiba mais</a>.
+      </p>
+      <div class="consent__actions">
+        <button class="btn btn--primary" type="button" data-consent-accept>Aceitar</button>
+        <button class="btn btn--secondary" type="button" data-consent-reject>Recusar</button>
+      </div>
+    </aside>
+  </body>
+</html>

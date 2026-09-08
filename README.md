@@ -1,0 +1,371 @@
+# Giovanella Escola Estética Animal — Website
+
+Site institucional da **Giovanella Escola Estética Animal**, em Joinville - SC.
+Foco em conversão por **WhatsApp** e **telefone**, apresentação dos cursos e SEO local.
+
+---
+
+## 1. Nome do projeto
+
+`giovanella-escola-estetica-animal`
+
+## 2. Tecnologias
+
+| Camada | Escolha | Por quê |
+| --- | --- | --- |
+| Marcação | HTML5 semântico | Todo o conteúdo está no HTML — melhor SEO e funciona sem JS |
+| Estilo | CSS moderno (custom properties, Grid, Flexbox, `clamp()`) | Sem framework: menos peso, controle total do design system |
+| Comportamento | JavaScript ES modules (vanilla) | ~5 KB gzip no total, sem dependências de runtime |
+| Build | [Vite](https://vitejs.dev) 5 | Servidor de desenvolvimento e minificação/hash de assets |
+| Fontes | Google Fonts (Fraunces + Inter) com `display=swap` | Evita texto invisível e protege o LCP |
+
+**Nenhuma dependência de runtime.** O `node_modules` existe apenas para o build.
+
+## 3. Como instalar
+
+```bash
+npm install
+```
+
+## 4. Como executar
+
+```bash
+npm run dev
+```
+
+Abre em `http://localhost:5173` (ou na próxima porta livre).
+
+Para rodar os testes automatizados:
+
+```bash
+npm test
+```
+
+## 5. Como gerar build
+
+```bash
+npm run build
+```
+
+Gera a pasta `dist/` com HTML, CSS e JS minificados e com hash de cache.
+Para conferir o resultado localmente antes de publicar:
+
+```bash
+npm run preview
+```
+
+## 6. Como fazer deploy
+
+O resultado é um site **100% estático**: qualquer hospedagem serve.
+
+**Netlify / Vercel / Cloudflare Pages**
+- Comando de build: `npm run build`
+- Diretório de publicação: `dist`
+- Variáveis de ambiente: ver seção 13 (opcionais)
+
+**Hospedagem tradicional (cPanel, FTP)**
+1. Rode `npm run build` na sua máquina.
+2. Envie **todo o conteúdo** de `dist/` para a pasta pública (`public_html`).
+3. Garanta que o certificado HTTPS esteja ativo e que `http://` redirecione para `https://`.
+
+**GitHub Pages**: se o site ficar em um subdiretório, altere `base` em `vite.config.js` para `'./'`.
+
+## 7. Estrutura de pastas
+
+```
+.
+├── index.html              # Página principal (todo o conteúdo do site)
+├── privacidade.html        # Política de Privacidade (LGPD)
+├── vite.config.js          # Configuração do build
+├── .env.example            # Modelo das variáveis de ambiente
+├── public/                 # Copiado para a raiz do site, sem processamento
+│   ├── favicon.svg
+│   ├── robots.txt
+│   ├── sitemap.xml
+│   └── img/
+│       └── Logo-Giovanella.png
+├── scripts/                # Testes automatizados (Node puro)
+│   ├── test-whatsapp.mjs
+│   └── test-paws.mjs
+└── src/
+    ├── css/
+    │   ├── main.css        # Ponto de entrada — importa os demais
+    │   ├── tokens.css      # CORES, tipografia, espaçamentos  ← edite aqui
+    │   ├── base.css        # Reset, tipografia base, acessibilidade
+    │   ├── components.css  # Botões, header, menu, cards, formulário, footer
+    │   ├── sections.css    # Layout de cada seção
+    │   └── animations.css  # Scroll reveal, patinhas, reduced-motion
+    └── js/
+        ├── main.js         # Ponto de entrada
+        ├── config/
+        │   └── site.config.js   # TELEFONE, WHATSAPP, ENDEREÇO  ← edite aqui
+        └── modules/
+            ├── analytics.js     # GA4 condicional + eventos
+            ├── config-bind.js   # Sincroniza o HTML com a configuração
+            ├── consent.js       # Banner LGPD
+            ├── env.js           # Detecção de reduced-motion / device fraco
+            ├── form.js          # Formulário de interesse → WhatsApp
+            ├── header.js        # Header fixo, adaptativo, seção ativa
+            ├── map.js           # Google Maps sob demanda + "Como chegar"
+            ├── mobile-menu.js   # Hamburger, ESC, foco preso
+            ├── paws.js          # Experimento das patinhas
+            ├── reveal.js        # Scroll reveal
+            └── whatsapp.js      # Montagem dos links de WhatsApp
+```
+
+## 8. Como trocar a logo
+
+1. Substitua `public/img/Logo-Giovanella.png` mantendo **o mesmo nome**.
+2. Se as proporções mudarem, ajuste `width` e `height` nas duas tags `<img>`
+   (`index.html`: header e footer) — elas evitam deslocamento de layout (CLS).
+
+> A logo atual é monocromática escura. No footer e sobre seções escuras ela é
+> convertida para branco via `filter: brightness(0) invert(1)`
+> (`src/css/components.css`). Se você receber uma versão clara oficial, troque o
+> `src` dessas ocorrências e remova o filtro.
+
+**Favicon:** `public/favicon.svg` é provisório (pegada nas cores da marca).
+Substitua por uma versão quadrada da logo quando houver.
+
+## 9. Como trocar as imagens
+
+Todo espaço de foto é um bloco `<div class="media-placeholder">` marcado com
+`TODO: INSERIR FOTO ...`. Para publicar a foto real, coloque um `<img>` **dentro**
+do bloco — ele cobre o placeholder automaticamente:
+
+```html
+<div class="media-placeholder">
+  <img src="/img/fachada.webp" alt="Fachada da escola em Joinville"
+       width="1000" height="1200" loading="lazy" />
+</div>
+```
+
+Recomendações: exporte em **WebP** (ou AVIF), sempre informe `width`/`height`,
+e use `loading="lazy"` em tudo que não aparece na primeira tela.
+
+## 10. Como alterar as cores
+
+Todas as cores vivem em `src/css/tokens.css`, no bloco `:root`.
+Trocar `--color-primary` muda botões, títulos e ícones em todo o site.
+
+> **Atenção ao contraste.** Dois tokens existem por acessibilidade:
+> `--color-secondary-deep` (links/textos, 6:1) e `--color-whatsapp-strong`
+> (fundo de botão com texto branco, 4.75:1). O `#5F7F35` e o `#25D366` originais
+> não atingem AA como texto, por isso são usados em ícones, bordas e realces.
+
+## 11. Como adicionar cursos
+
+Em `index.html`, seção `#cursos`: duplique um bloco `<article class="card course-card">`
+e ajuste:
+
+- o `<h3 class="card__title">` (nome do curso);
+- o parágrafo de descrição e a lista `course-card__list`;
+- as `<span class="tag">` (carga horária, modalidade);
+- **o atributo `data-course` do botão** — é ele que entra na mensagem do WhatsApp;
+- remova o `<span class="placeholder-note">`.
+
+```html
+<a class="btn btn--whatsapp btn--block"
+   data-wa="course"
+   data-course="Banho e Tosa — Módulo I"
+   data-track="curso_interesse"
+   data-track-label="banho_tosa_1"
+   href="https://wa.me/5547996086955">Tenho interesse</a>
+```
+
+O `href` é reescrito automaticamente com a mensagem codificada; o valor no HTML
+serve apenas como fallback caso o JavaScript não carregue.
+
+Atualize também as opções do `<select id="form-assunto">` na seção de contato.
+
+## 12. Como adicionar depoimentos
+
+Em `index.html`, seção `#depoimentos`: duplique um `<article class="testimonial">`,
+troque a citação, o nome, o curso e a inicial do avatar, e **remova o
+`placeholder-note`**. Ajuste o `aria-label` das estrelas para a nota real.
+
+> Publique apenas depoimentos verdadeiros e com autorização das pessoas citadas.
+
+## 13. Como configurar o Google Analytics
+
+1. Crie a propriedade GA4 e copie o *Measurement ID* (`G-XXXXXXXXXX`).
+2. Copie `.env.example` para `.env` e preencha:
+
+```
+VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+```
+
+3. Rode `npm run build` novamente.
+
+**Comportamento:** sem ID configurado, nenhum script de medição é carregado e o
+banner de consentimento nem aparece. Com ID configurado, o GA só é carregado
+**após o "Aceitar"** do visitante, com `anonymize_ip` e sinais de anúncio
+desativados.
+
+**Eventos registrados** (nenhum contém dado pessoal):
+
+| Evento | Quando ocorre |
+| --- | --- |
+| `whatsapp_clique` | Qualquer CTA de WhatsApp (com `label` da origem) |
+| `telefone_clique` | Qualquer link `tel:` |
+| `como_chegar_clique` | Botão "Como chegar" |
+| `curso_interesse` | Botão "Tenho interesse" de um curso |
+| `cta_clique` | Demais CTAs principais |
+| `menu_mobile_abrir` | Abertura do menu mobile |
+| `mapa_carregar` | Carregamento do mapa |
+| `formulario_whatsapp` | Envio do formulário (só o assunto escolhido) |
+
+Para rastrear um novo elemento, basta adicionar `data-track="nome_do_evento"`
+(e, opcionalmente, `data-track-label="origem"`).
+
+## 14. Como configurar o Google Maps
+
+A implementação atual **não usa API Key e não tem custo**: o mapa é o embed
+público do Google, buscado pelo endereço, e só é carregado quando o visitante
+clica — o que economiza centenas de KB e evita cookies de terceiros antes do
+consentimento.
+
+Nada precisa ser configurado. Se você mudar o endereço em `site.config.js`, o
+mapa e o botão "Como chegar" acompanham automaticamente.
+
+Para migrar para a Maps JavaScript API (marcador customizado, estilo próprio):
+preencha `VITE_GOOGLE_MAPS_API_KEY` no `.env`, **restrinja a chave por domínio**
+no Google Cloud Console e ajuste `src/js/modules/map.js`.
+
+## 15. Como integrar avaliações Google
+
+O site **não exibe nenhuma avaliação** hoje — nada foi inventado e não há
+scraping (proibido pelos termos do Google). O espaço está reservado em
+`index.html` (`<div data-google-reviews hidden>`).
+
+Caminhos oficiais para publicar avaliações reais:
+
+1. **Google Places API — Place Details** (recomendado). Retorna até 5 avaliações.
+   Exige chave *server-side*: crie um pequeno endpoint (Netlify/Vercel Function)
+   que consulta a API, cacheia o resultado e devolve o JSON ao site. **A chave
+   nunca pode ir para o navegador.** Preencha `VITE_GOOGLE_PLACE_ID` com o Place
+   ID do perfil.
+2. **Widget de terceiros autorizado** (Elfsight, Trustindex, EmbedSocial, etc.):
+   solução paga, sem backend próprio.
+
+Só depois de exibir avaliações reais e elegíveis é permitido adicionar
+`AggregateRating` ao Schema.org — usá-lo sem isso viola as diretrizes do Google.
+
+## 16. Como alterar o telefone
+
+`src/js/config/site.config.js` → `contact.phoneDisplay` (exibição) e
+`contact.phoneE164` (link `tel:`). Todos os links `tel:` e textos marcados com
+`data-config="contact.phoneDisplay"` são atualizados sozinhos.
+
+Atualize também o valor escrito no HTML (para quem acessa sem JS) e o campo
+`telephone` do Schema.org no `<head>` do `index.html`.
+
+## 17. Como alterar o WhatsApp
+
+`src/js/config/site.config.js` → `contact.whatsapp` (somente dígitos, com código
+do país: `5547996086955`). As mensagens padrão ficam logo abaixo, em `messages`.
+
+## 18. Como alterar o endereço
+
+`src/js/config/site.config.js` → objeto `address`. Isso atualiza o mapa e o botão
+"Como chegar". Atualize também, manualmente:
+
+- os blocos `<address>` em `index.html` (contato e footer);
+- o `PostalAddress` do Schema.org no `<head>`;
+- a `<meta name="geo.placename">`, se a cidade mudar.
+
+## 19. Como alterar textos
+
+Todo o conteúdo está diretamente no `index.html` (bom para SEO). Procure por
+`TODO:` — cada trecho provisório está marcado no código **e** sinalizado
+visualmente no site pelo selo laranja `placeholder-note`.
+
+O rótulo **"Patriocinio"** foi mantido exatamente como informado pelo
+proprietário e está centralizado em `site.config.js` → `labels.sponsorship`.
+Para trocar por "Patrocínio", altere apenas essa linha: menu desktop, menu
+mobile, título da seção e footer acompanham. (O `id="patriocinio"` da seção e os
+`href="#patriocinio"` permanecem — mudá-los quebraria links já compartilhados.)
+
+## 20. Checklist de produção
+
+**Conteúdo**
+- [ ] Substituir todos os `TODO:` (busque no projeto — nenhum selo laranja pode sobrar)
+- [ ] Inserir os cursos reais (nome, carga horária, modalidade, público-alvo)
+- [ ] Inserir depoimentos reais, com autorização
+- [ ] Inserir fotos reais em WebP/AVIF, com `width`/`height`
+- [ ] Inserir logos dos parceiros
+- [ ] Revisar a Política de Privacidade com apoio jurídico e indicar o encarregado
+
+**Configuração**
+- [ ] Trocar o domínio provisório em: `index.html` (canonical, Open Graph, Schema),
+      `privacidade.html`, `public/robots.txt`, `public/sitemap.xml` e
+      `site.config.js` → `siteUrl`
+- [ ] Criar a imagem social 1200×630 e apontar a `og:image` para ela
+- [ ] Gerar `apple-touch-icon.png` (180×180) e favicon quadrado
+- [ ] Preencher o CEP e os horários de funcionamento no Schema.org
+- [ ] Configurar o GA4 (opcional)
+
+**Técnico**
+- [ ] `npm test` e `npm run build` sem erros
+- [ ] HTTPS ativo com redirecionamento de `http://`
+- [ ] Testar em Chrome, Safari, Firefox e Edge; iOS e Android reais
+- [ ] Testar o WhatsApp em celular (deve abrir o app, não o navegador)
+- [ ] Testar o link `tel:` em celular
+- [ ] Rodar Lighthouse (metas: Performance ≥ 90, Acessibilidade ≥ 95, SEO 100)
+- [ ] Enviar o `sitemap.xml` no Google Search Console
+- [ ] Cadastrar/atualizar o Perfil da Empresa no Google (essencial para SEO local)
+
+---
+
+## Notas de implementação
+
+**Sem e-mail, sem backend.** O formulário não envia e-mail e não armazena nada:
+ele valida os campos, monta a mensagem e abre o WhatsApp. As proteções são as
+possíveis sem servidor — validação, limites de tamanho, sanitização, honeypot e
+trava contra cliques repetidos. **Não há** (nem seria possível haver) bloqueio
+por IP ou rate limiting real sem backend, e o código não finge que há.
+
+**Privacidade por padrão.** Nenhum recurso de terceiros é carregado sem ação do
+visitante: o mapa só depois do clique, o analytics só depois do consentimento.
+Nome, telefone e mensagem nunca são enviados ao analytics.
+
+**Acessibilidade.** Contraste verificado (menor par em uso: 4.75:1), navegação
+completa por teclado, foco visível, foco preso no menu mobile, `aria-expanded`/
+`aria-controls`, skip link, erros de formulário anunciados por `role="alert"` e
+`prefers-reduced-motion` respeitado em todo o site.
+
+**Performance.** Sem framework, ~5,5 KB de JS (gzip) e ~6 KB de CSS (gzip); as
+patinhas entram em `requestIdleCallback` para não competir com o LCP e se
+desligam sozinhas em aparelhos fracos ou com `saveData`.
+
+**Patinhas (Experimento 1).** Em cada emenda entre duas seções o JS insere uma
+trilha que atravessa a página na diagonal, cruzando a divisa. As pegadas não se
+movem: são *carimbadas* uma a uma conforme a divisa sobe pela tela — rolando
+para baixo elas surgem na ordem do trajeto, rolando para cima somem na ordem
+inversa. O sentido alterna a cada divisa (direita→esquerda, depois
+esquerda→direita). As posições são calculadas uma única vez; durante o scroll o
+código só alterna a classe `.is-stamped`, sem recálculo de layout por frame.
+Parâmetros ajustáveis no topo de `src/js/modules/paws.js`:
+
+| Constante | O que controla |
+| --- | --- |
+| `SEAM_SPREAD` | Quanto a trilha se afasta da divisa (altura da diagonal) |
+| `TRAIL_HALF` | Meia-altura da janela que **recorta** a trilha (ver aviso abaixo) |
+| `PAW_SIZE` | Lado da pegada; publicado no CSS como `--paw-size` |
+| `STEP_SPACING` | Espaçamento entre pegadas (define quantas cabem na largura) |
+| `MIN_PAWS` / `MAX_PAWS` | Limites de pegadas por trilha |
+| `MAX_OPACITY` | Intensidade máxima do efeito |
+| `PAW_STRIDE` | Afastamento entre a pata esquerda e a direita |
+
+> **Não remova o `overflow: hidden` da `.paw-trail`.** As pegadas das pontas
+> saem pelas laterais de propósito; sem o recorte elas alargam o documento e,
+> no celular, a viewport de layout — o que empurra o header fixo para fora da
+> coluna visível. Pela mesma razão, se aumentar `SEAM_SPREAD` aumente
+> `TRAIL_HALF` junto: há um teste em `scripts/test-paws.mjs` que falha se a
+> geometria passar a ser cortada na vertical.
+
+> **Cuidado com `aspect-ratio` + `min-height` no mesmo elemento.** Quando a
+> largura disponível fica menor que `min-height × proporção`, é o `min-height`
+> que passa a ditar a **largura**, estourando a coluna. Foi o que aconteceu com
+> o `.map` (`4/3` + `300px` exigiam 400px de largura em telas de 320px).
+> Prefira definir a altura por proporção sobre a largura, sem `min-height`.

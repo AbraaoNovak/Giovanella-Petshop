@@ -1,0 +1,9 @@
+/* ==========================================================================
+   Giovanella Escola Estética Animal — folha de estilo principal
+   A ordem dos imports importa: tokens -> base -> componentes -> seções -> anim.
+   ========================================================================== */
+@import './tokens.css';
+@import './base.css';
+@import './components.css';
+@import './sections.css';
+@import './animations.css';

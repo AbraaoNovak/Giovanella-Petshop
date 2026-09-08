@@ -1,0 +1,20 @@
+{
+  "name": "giovanella-escola-estetica-animal",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website institucional da Giovanella Escola Estética Animal - Joinville/SC",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node scripts/test-whatsapp.mjs && node scripts/test-paws.mjs"
+  },
+  "devDependencies": {
+    "vite": "^5.4.10"
+  },
+  "browserslist": [
+    "defaults",
+    "not IE 11"
+  ]
+}
