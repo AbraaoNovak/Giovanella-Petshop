@@ -133,7 +133,10 @@
 /* Quando a foto real for inserida, o <img> cobre o placeholder. */
 .media-placeholder img {
   position: absolute;
-  inset: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -261,6 +264,53 @@
 }
 
 /* --------------------------------------------------------------------------
+   CURSOS — vitrine de destaques + lista expansível
+
+   Estratégia de progressive enhancement:
+   - sem JavaScript, TODOS os cursos aparecem e o botão não existe;
+   - com JavaScript (classe `.js`, aplicada em script inline no <head> antes
+     da primeira pintura), os extras já nascem recolhidos e o botão aparece.
+   Os cards ficam sempre no HTML — o Google indexa os 16 nomes de curso.
+   -------------------------------------------------------------------------- */
+.courses__extra {
+  /* Mesmo espaçamento do `gap` da grade, para as duas grades parecerem uma só. */
+  margin-top: var(--space-md);
+}
+
+.js .courses__extra {
+  display: none;
+}
+
+.js .courses__extra.is-expanded {
+  /* Precisa vencer a regra acima e restaurar o `display` de `.grid`. */
+  display: grid;
+}
+
+.courses__actions {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-lg);
+}
+
+/* O botão só faz sentido quando há JavaScript para expandir/recolher. */
+.courses__toggle {
+  display: none;
+}
+
+.js .courses__toggle {
+  display: inline-flex;
+}
+
+.courses__toggle-icon {
+  transition: transform var(--dur) var(--ease-out);
+}
+
+/* Aberto: a seta aponta para cima ("recolher"). */
+.courses__toggle[aria-expanded='true'] .courses__toggle-icon {
+  transform: rotate(180deg);
+}
+
+/* --------------------------------------------------------------------------
    CONTATO
    -------------------------------------------------------------------------- */
 .contact__grid {
@@ -371,6 +421,12 @@ a.channel:hover {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
   gap: var(--space-sm);
+  /* Com poucos parceiros, `1fr` esticaria cada card por metade da tela e,
+     com a proporção 3/2, eles ficariam gigantes. O teto centralizado mantém
+     os cards em tamanho de logotipo — e continua funcionando se um terceiro
+     parceiro for adicionado. */
+  max-width: 680px;
+  margin-inline: auto;
 }
 
 .sponsor {

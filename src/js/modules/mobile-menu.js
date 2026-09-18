@@ -10,6 +10,7 @@
  */
 
 import { trackEvent } from './analytics.js';
+import { onMediaChange } from './env.js';
 
 /** Seletor dos elementos focáveis usados no focus trap. */
 const FOCUSABLE =
@@ -97,8 +98,8 @@ export function initMobileMenu() {
   });
 
   // Ao voltar para o layout desktop, o menu mobile não deve continuar aberto.
-  const desktop = window.matchMedia('(min-width: 1024px)');
-  desktop.addEventListener('change', (event) => {
+  // `onMediaChange` cobre navegadores sem MediaQueryList.addEventListener.
+  onMediaChange('(min-width: 1024px)', (event) => {
     if (event.matches) close({ restoreFocus: false });
   });
 }

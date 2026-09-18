@@ -14,8 +14,12 @@ export default defineConfig({
 
   build: {
     outDir: 'dist',
-    // Alvo moderno: menos polyfills, bundle menor.
-    target: 'es2019',
+    // Navegadores suportados. O esbuild rebaixa a SINTAXE para esses alvos
+    // (ex.: `?.`/`??` no JS; `inset` -> top/right/bottom/left no CSS).
+    // Ele NÃO adiciona polyfills de APIs — essas diferenças são tratadas no
+    // próprio código (ver env.js e css/compat.css).
+    target: ['es2019', 'chrome88', 'edge88', 'firefox78', 'safari14', 'ios14'],
+    cssTarget: ['chrome88', 'edge88', 'firefox78', 'safari14', 'ios14'],
     cssMinify: true,
     // Inline apenas de assets muito pequenos; o resto vira arquivo com hash.
     assetsInlineLimit: 2048,

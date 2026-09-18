@@ -60,15 +60,24 @@ h2,
 h3,
 h4 {
   font-family: var(--font-display);
-  font-weight: 600;
+  /* Em uma sans-serif os títulos precisam de mais peso e de um leve
+     aperto entre letras para manterem presença sem a serifa. */
+  font-weight: 700;
   line-height: 1.15;
   text-wrap: balance;
   color: var(--color-primary);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.022em;
 }
 
 h1 { font-size: var(--step-5); }
 h2 { font-size: var(--step-4); }
+
+/* Em corpos de texto menores o aperto precisa ser menor, ou prejudica a leitura. */
+h3,
+h4 {
+  letter-spacing: -0.014em;
+}
+
 h3 { font-size: var(--step-2); }
 h4 { font-size: var(--step-1); }
 

@@ -71,6 +71,21 @@
     rotate(var(--paw-rot, 0deg)) scale(1);
 }
 
+/* Modo estático (menos movimento ou aparelho limitado): as pegadas já
+   nascem carimbadas e sem transição — decoração presente, zero movimento. */
+.paw-trail--static .paw {
+  transition: none;
+}
+
+/* Alto contraste do Windows (`forced-colors`): o navegador força a cor de
+   preenchimento de SVGs e as pegadas virariam borrões de cor sólida
+   competindo com o texto. Por serem puramente decorativas, saem de cena. */
+@media (forced-colors: active) {
+  .paw-trail {
+    display: none;
+  }
+}
+
 /* --------------------------------------------------------------------------
    PREFERS-REDUCED-MOTION
    Regra global: nada se move.
@@ -94,7 +109,6 @@
     transform: none;
   }
 
-  .paw-trail {
-    display: none;
-  }
+  /* As patinhas NÃO são escondidas aqui: o JS as exibe em modo estático
+     (`.paw-trail--static`), sem movimento. Ver resolvePawMode() em paws.js. */
 }

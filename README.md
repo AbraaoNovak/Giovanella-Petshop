@@ -143,10 +143,32 @@ do bloco — ele cobre o placeholder automaticamente:
 Recomendações: exporte em **WebP** (ou AVIF), sempre informe `width`/`height`,
 e use `loading="lazy"` em tudo que não aparece na primeira tela.
 
+## 9b. Posicionamento: escola, não loja
+
+O cliente pediu explicitamente que o site **não tenha nenhuma correlação com
+petshop** — a justificativa é que muitos petshops passaram a dar aulas, e a
+escola quer se diferenciar disso. Em termos práticos:
+
+- o Schema.org usa `EducationalOrganization` + `LocalBusiness`.
+  **Não reintroduza `PetStore`** nem tipos de loja/varejo;
+- os textos falam de cursos, turmas e matrículas — não de serviços prestados;
+- a palavra "petshop" não aparece em nenhum arquivo do site.
+
+> O repositório ainda se chama `Giovanella-Petshop`. Vale renomeá-lo no GitHub
+> (Settings → Repository name); o Git cria um redirecionamento automático, então
+> nada quebra — basta depois rodar
+> `git remote set-url origin <nova-url>`.
+
 ## 10. Como alterar as cores
 
 Todas as cores vivem em `src/css/tokens.css`, no bloco `:root`.
 Trocar `--color-primary` muda botões, títulos e ícones em todo o site.
+
+**Tipografia.** O site usa **uma única família** — Inter, a mesma do menu do
+header. O token `--font-display` existe apenas para permitir que títulos voltem
+a divergir no futuro; hoje ele aponta para `--font-sans`. Se trocar a fonte,
+lembre de atualizar também o `<link>` do Google Fonts nos **dois** arquivos HTML
+(`index.html` e `privacidade.html`).
 
 > **Atenção ao contraste.** Dois tokens existem por acessibilidade:
 > `--color-secondary-deep` (links/textos, 6:1) e `--color-whatsapp-strong`
@@ -177,6 +199,30 @@ O `href` é reescrito automaticamente com a mensagem codificada; o valor no HTML
 serve apenas como fallback caso o JavaScript não carregue.
 
 Atualize também as opções do `<select id="form-assunto">` na seção de contato.
+
+### Destaques e o botão "Ver mais"
+
+A seção tem **duas grades**:
+
+| Grade | O que é |
+| --- | --- |
+| `<div class="grid">` | Os cursos em destaque — sempre visíveis |
+| `<div class="grid courses__extra" id="cursos-extras">` | Os demais — recolhidos atrás do botão |
+
+Para promover ou rebaixar um curso, **mova o `<article>` inteiro** de uma grade
+para a outra. Nada mais precisa ser tocado: o rótulo do botão é montado a partir
+da contagem real de cards (`Ver todos os N cursos`), então ele se ajusta sozinho
+quando cursos são adicionados ou removidos.
+
+Só os destaques trazem a lista `course-card__list`. É proposital — dá peso
+comercial a eles —, mas nada impede usá-la também nos demais.
+
+**Por que os cursos ocultos continuam no HTML:** o buscador indexa os nomes de
+todos os cursos, não apenas os quatro visíveis. Eles são recolhidos por CSS
+(`.js .courses__extra`), e a classe `.js` é aplicada por um script inline no
+`<head>` — antes da primeira pintura, para não haver piscada. Sem JavaScript,
+todos os cursos aparecem e o botão não é exibido. **Não troque esse mecanismo
+por `hidden` no HTML**: isso tornaria os cursos inacessíveis sem JavaScript.
 
 ## 12. Como adicionar depoimentos
 
@@ -337,6 +383,31 @@ completa por teclado, foco visível, foco preso no menu mobile, `aria-expanded`/
 **Performance.** Sem framework, ~5,5 KB de JS (gzip) e ~6 KB de CSS (gzip); as
 patinhas entram em `requestIdleCallback` para não competir com o LCP e se
 desligam sozinhas em aparelhos fracos ou com `saveData`.
+
+**Compatibilidade com navegadores.** Suportados: Chrome/Edge 88+, Firefox 78+
+(ESR), Safari/iOS 14+ e Samsung Internet 15+. O site foi desenhado para
+**nunca esconder conteúdo** quando algo falha:
+
+| Situação | O que acontece |
+| --- | --- |
+| JavaScript desativado ou bloqueado | Todos os 16 cursos visíveis, sem botão "Ver mais"; hamburger oculto (navegação pela rolagem e pelo rodapé); links de WhatsApp funcionam sem mensagem pré-preenchida |
+| Script não carrega (rede, bloqueador, `file://`) | Detectado por um listener no `<head>`, que devolve a página ao modo sem JS |
+| Navegador sem ES modules | `<script nomodule>` devolve a página ao modo sem JS |
+| Erro durante a inicialização | Cada módulo roda isolado (`safely()` em `main.js`); se nada terminar em 8 s, a página volta ao modo sem JS |
+| "Reduzir movimento" no sistema | Patinhas **estáticas** (visíveis, sem animação) |
+| Aparelho muito limitado / economia de dados | Patinhas estáticas |
+| Alto contraste do Windows | Patinhas ocultas (decorativas; viram borrões com cores forçadas) |
+
+Fallbacks de CSS ficam em `src/css/compat.css`. **Não use `inset`** no CSS
+(escreva `top/right/bottom/left`) e **não chame `matchMedia(...).addEventListener`
+diretamente** — use `onMediaChange()` de `env.js`.
+
+> **"As patinhas não aparecem no meu navegador."** Em ordem: (1) elas surgem
+> **nas divisas entre as seções** ao rolar, não no topo da página; (2) verifique
+> se o Windows está em **alto contraste** — nesse caso ficam ocultas de
+> propósito; (3) desative extensões de **modo escuro** (ex.: Dark Reader), que
+> recolorem a página e podem torná-las invisíveis; (4) abra o console (F12) e
+> procure mensagens `[Giovanella]`.
 
 **Patinhas (Experimento 1).** Em cada emenda entre duas seções o JS insere uma
 trilha que atravessa a página na diagonal, cruzando a divisa. As pegadas não se

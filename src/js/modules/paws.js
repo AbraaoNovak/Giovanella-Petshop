@@ -21,10 +21,12 @@
  * - a classe só é tocada quando a quantidade carimbada muda;
  * - `requestAnimationFrame` apenas quando há scroll pendente — em repouso o
  *   custo de CPU é zero;
- * - desligado em `prefers-reduced-motion` e em aparelhos de baixo desempenho.
+ * - com `prefers-reduced-motion` ou em aparelhos de baixo desempenho, as
+ *   pegadas aparecem ESTÁTICAS (todas carimbadas, sem transição) em vez de
+ *   sumirem — ver `resolvePawMode`.
  */
 
-import { prefersReducedMotion, isLowPowerDevice } from './env.js';
+import { prefersReducedMotion, isLowPowerDevice, onMediaChange } from './env.js';
 
 /**
  * Lado do quadrado de cada pegada, em px.
@@ -156,18 +158,36 @@ export function stampTrail(paws, anterior, proxima) {
   return alvo;
 }
 
+/**
+ * Decide como as patinhas devem se comportar neste navegador.
+ *
+ * - 'animated': carimbo progressivo acompanhando o scroll (padrão);
+ * - 'static':   todas as pegadas já visíveis, sem transição e sem ouvir scroll.
+ *
+ * O modo estático substitui o antigo "desligar tudo". O pedido de acessibilidade
+ * é não ter MOVIMENTO — a decoração em si não incomoda ninguém. Antes, com
+ * "reduzir movimento" ativo (algo comum em Windows com efeitos visuais
+ * desligados, em sessões de Área de Trabalho Remota ou em navegadores com
+ * economia de energia), as patinhas simplesmente não apareciam.
+ *
+ * @returns {'animated'|'static'}
+ */
+export function resolvePawMode() {
+  return prefersReducedMotion() || isLowPowerDevice() ? 'static' : 'animated';
+}
+
 export function initPaws() {
   const host = document.querySelector('[data-paw-seams]');
   if (!host) return;
 
-  // Respeita a preferência do usuário e a capacidade do aparelho.
-  if (prefersReducedMotion() || isLowPowerDevice()) return;
-
   // Uma trilha para cada emenda: inserida no topo da seção seguinte, de modo
   // que metade das pegadas caia sobre a seção anterior e metade sobre a atual.
-  const sections = Array.from(host.querySelectorAll(':scope > section'));
+  // `children` + filtro em vez de `:scope > section`, por máxima compatibilidade.
+  const sections = Array.from(host.children).filter((el) => el.tagName === 'SECTION');
   const targets = sections.slice(1);
   if (!targets.length) return;
+
+  let mode = resolvePawMode();
 
   /** @type {{el:HTMLElement, section:HTMLElement, paws:HTMLElement[], stamped:number}[]} */
   let trails = [];
@@ -210,15 +230,27 @@ export function initPaws() {
         paw.style.setProperty('--paw-opacity', (MAX_OPACITY * fade).toFixed(3));
       });
 
-      section.prepend(el);
+      section.insertBefore(el, section.firstChild);
       return { el, section, paws, stamped: 0 };
     });
 
-    update();
+    applyMode();
+  }
+
+  /** Aplica o modo atual a todas as trilhas. */
+  function applyMode() {
+    const estatico = mode === 'static';
+    trails.forEach((trail) => {
+      trail.el.classList.toggle('paw-trail--static', estatico);
+      // No modo estático a trilha inteira fica carimbada de uma vez.
+      if (estatico) trail.stamped = stampTrail(trail.paws, trail.stamped, trail.paws.length);
+    });
+    if (!estatico) update();
   }
 
   function update() {
     ticking = false;
+    if (mode !== 'animated') return;
     const viewportHeight = window.innerHeight;
 
     for (const trail of trails) {
@@ -228,26 +260,27 @@ export function initPaws() {
       if (seamY > viewportHeight * 1.3 || seamY < -viewportHeight * 0.6) {
         // Garante o estado final correto ao pular trechos (âncoras, teclado).
         const alvo = seamY < 0 ? trail.paws.length : 0;
-        if (trail.stamped !== alvo) applyStamped(trail, alvo);
+        if (trail.stamped !== alvo) trail.stamped = stampTrail(trail.paws, trail.stamped, alvo);
         continue;
       }
 
       const p = seamProgress(seamY, viewportHeight);
       const alvo = Math.round(p * trail.paws.length);
       // Só toca no DOM quando a quantidade carimbada realmente muda.
-      if (alvo !== trail.stamped) applyStamped(trail, alvo);
+      if (alvo !== trail.stamped) trail.stamped = stampTrail(trail.paws, trail.stamped, alvo);
     }
   }
 
-  /** Marca as `count` primeiras pegadas da trilha e apaga as demais. */
-  function applyStamped(trail, count) {
-    trail.stamped = stampTrail(trail.paws, trail.stamped, count);
-  }
-
   function onScroll() {
-    if (ticking) return;
+    if (ticking || mode !== 'animated') return;
     ticking = true;
-    requestAnimationFrame(update);
+    // Sem rAF (ambientes muito restritos), atualiza direto — ainda barato,
+    // pois só alterna classes.
+    if (typeof window.requestAnimationFrame === 'function') {
+      window.requestAnimationFrame(update);
+    } else {
+      update();
+    }
   }
 
   let resizeTimer;
@@ -257,16 +290,16 @@ export function initPaws() {
   }
 
   build();
+  // Mesmo no modo estático o scroll é ouvido: se o usuário desligar
+  // "reduzir movimento" durante a visita, a animação volta sem recarregar.
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onResize, { passive: true });
 
-  // Se o usuário mudar a preferência de movimento durante a visita, obedece.
-  window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', (event) => {
-    if (event.matches) {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onResize);
-      trails.forEach((trail) => trail.el.remove());
-      trails = [];
-    }
+  // Acompanha mudanças de preferência durante a visita, nos dois sentidos.
+  onMediaChange('(prefers-reduced-motion: reduce)', () => {
+    const novo = resolvePawMode();
+    if (novo === mode) return;
+    mode = novo;
+    applyMode();
   });
 }
