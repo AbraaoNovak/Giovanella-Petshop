@@ -97,8 +97,11 @@ a:hover {
   color: var(--color-primary);
 }
 
-ul[class],
-ol[class] {
+/* :where() zera a especificidade do reset. Sem ele, `ul[class]` (elemento +
+   atributo) vencia qualquer classe de componente — o padding de .trust, por
+   exemplo, nunca era aplicado. Suportado a partir de Chrome 88, Firefox 78 e
+   Safari 14, o mínimo do projeto. */
+:where(ul[class], ol[class]) {
   list-style: none;
   padding: 0;
 }

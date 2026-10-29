@@ -60,6 +60,12 @@
   max-width: 56ch;
 }
 
+/* A frase de abertura é o gancho: mesma família, mais peso e a cor da marca. */
+.hero__subtitle strong {
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
@@ -70,17 +76,34 @@
 /* ---------- Indicadores de confiança ---------- */
 .trust {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
-  gap: var(--space-sm);
+  /* Celular: um indicador por linha, com a largura toda para o texto (em
+     colunas estreitas, "Bairro Floresta" e o endereço quebravam no meio). */
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
   margin-top: var(--space-xl);
-  padding-top: var(--space-md);
+  /* Respiro entre a linha divisória e o conteúdo. */
+  padding-top: var(--space-lg);
   border-top: 1px solid var(--color-border);
 }
 
 .trust__item {
   display: flex;
   align-items: flex-start;
-  gap: var(--space-2xs);
+  gap: var(--space-xs);
+}
+
+/* A partir de 600 px: três colunas com o ícone ACIMA do texto, o que devolve
+   ao texto os ~40 px que o ícone ao lado ocupava. */
+@media (min-width: 600px) {
+  .trust {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-md) var(--space-lg);
+  }
+
+  .trust__item {
+    flex-direction: column;
+    gap: var(--space-2xs);
+  }
 }
 
 .trust__icon {
@@ -104,7 +127,9 @@
 }
 
 .trust__desc {
+  margin-top: 0.3rem;
   font-size: var(--step--1);
+  line-height: 1.5;
   color: var(--color-text-muted);
 }
 
