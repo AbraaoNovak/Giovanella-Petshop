@@ -97,6 +97,13 @@ a:hover {
   color: var(--color-primary);
 }
 
+/* O atributo `hidden` deve SEMPRE esconder. Sem isto, qualquer classe com
+   `display` (ex.: .btn usa inline-flex) venceria o estilo padrão do navegador
+   e o elemento continuaria aparecendo. */
+[hidden] {
+  display: none !important;
+}
+
 /* :where() zera a especificidade do reset. Sem ele, `ul[class]` (elemento +
    atributo) vencia qualquer classe de componente — o padding de .trust, por
    exemplo, nunca era aplicado. Suportado a partir de Chrome 88, Firefox 78 e

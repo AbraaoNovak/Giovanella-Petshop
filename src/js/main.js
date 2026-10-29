@@ -16,6 +16,7 @@ import { initMobileMenu } from './modules/mobile-menu.js';
 import { initReveal } from './modules/reveal.js';
 import { initPaws } from './modules/paws.js';
 import { initCourses } from './modules/courses.js';
+import { initMarquee } from './modules/marquee.js';
 import { initContactForm } from './modules/form.js';
 import { initMap } from './modules/map.js';
 import { initConsent } from './modules/consent.js';
@@ -77,6 +78,7 @@ function boot() {
 
   // --- Interações de conteúdo ---
   safely('cursos', initCourses);
+  safely('depoimentos', initMarquee);
   safely('formulário', initContactForm);
   safely('mapa', initMap);
 

@@ -332,9 +332,20 @@ Regras seguidas, e que valem manter:
 > cadela no "pet-shop Giovanella", não da escola, e contradiz o posicionamento
 > da seção 9b.
 
-O botão "Ver todas as avaliações no Google" abre uma busca no Google Maps pelo
-nome e endereço da escola. **Troque pelo link direto do perfil** (no Google
-Maps: perfil da escola → Compartilhar → Copiar link).
+Os depoimentos ficam num **carrossel contínuo** (`src/js/modules/marquee.js`):
+deslizam devagar da direita para a esquerda, com as bordas esmaecidas. Edite só
+os cards originais — o JavaScript cria sozinho as cópias que fecham o loop. A
+velocidade é a constante `VELOCIDADE` (pixels por segundo) no topo do módulo.
+Não há botão de pausa (decisão do cliente). A pausa, exigida por
+acessibilidade para conteúdo em movimento, acontece com o **mouse por cima**,
+com **um toque** no celular (o toque dá foco ao carrossel) e ao chegar pelo
+**teclado** (Tab); fora da tela ele também para sozinho. Isso depende do
+`tabindex="0"` do carrossel — **não o remova**. `npm run test:navegadores`
+verifica a pausa por toque e por foco. Com "reduzir movimento" ou sem JavaScript, vira uma faixa
+parada que rola com o dedo.
+
+O botão "Ver todas as avaliações no Google" abre a busca do Google já com o
+painel de avaliações da escola (trecho `#lrd=` do link).
 
 ## 13. Como configurar o Google Analytics
 

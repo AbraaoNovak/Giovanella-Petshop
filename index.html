@@ -1959,10 +1959,22 @@
             </p>
           </div>
 
-          <!-- Layout em colunas: cada card tem a altura do próprio texto,
-               sem os espaços vazios que uma grade de alturas iguais criaria
-               com depoimentos de tamanhos tão diferentes. -->
-          <div class="testimonials" data-reveal>
+          <!-- Carrossel contínuo (src/js/modules/marquee.js): os cards deslizam
+               da direita para a esquerda, com as bordas esmaecidas. O JS
+               duplica os cards para o loop sem emenda — edite só os originais.
+               Sem JS ou com "reduzir movimento": faixa parada, rolável.
+               Sem botão de pausa (decisão do cliente): a rolagem pausa com o
+               mouse por cima, com um toque (tabindex="0" faz o toque dar foco)
+               e ao chegar pelo teclado. Não remova o tabindex. -->
+          <div
+            class="marquee"
+            data-marquee
+            data-reveal
+            role="region"
+            aria-label="Avaliações de alunos no Google"
+            tabindex="0"
+          >
+            <div class="marquee__track" data-marquee-track>
             <article class="testimonial">
               <div class="testimonial__stars" role="img" aria-label="Avaliação: 5 de 5 estrelas">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
@@ -2064,18 +2076,19 @@
                 </span>
               </div>
             </article>
+            </div>
           </div>
 
-          <p class="testimonials__more" data-reveal>
+          <div class="testimonials__actions" data-reveal>
             <a
               class="btn btn--secondary"
-              href="https://www.google.com/maps/search/?api=1&query=Giovanella%20Escola%20Est%C3%A9tica%20Animal%2C%20Rua%20Elly%20Soares%2C%20511%2C%20Joinville%20-%20SC"
+              href="https://www.google.com/search?q=giovanella+escola+est%C3%A9tica+animal#lrd=0x94deb19f3991057f:0x2a0c73cae0293fff,1,,,,"
               target="_blank"
               rel="noopener noreferrer"
               data-track="avaliacoes_google_clique"
               >Ver todas as avaliações no Google</a
             >
-          </p>
+          </div>
         </div>
       </section>
 

@@ -43,7 +43,7 @@ const CENARIOS = {
   },
   reduzirMovimento: {
     preparar: (cdp) => cdp('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] }),
-    espera: { js: true, patinhas: 'estaticas', cursosExpandem: true, menu: true, whatsapp: true },
+    espera: { js: true, patinhas: 'estaticas', cursosExpandem: true, menu: true, whatsapp: true, carrosselParado: true },
   },
   aparelhoFraco: {
     preparar: (cdp) => cdp('Emulation.setHardwareConcurrencyOverride', { hardwareConcurrency: 2 }),
@@ -62,7 +62,12 @@ const CENARIOS = {
     espera: { js: false, patinhas: 'nenhuma', todosCursosVisiveis: true },
   },
   celular: {
-    preparar: (cdp) => cdp('Emulation.setDeviceMetricsOverride', CELULAR),
+    preparar: async (cdp) => {
+      await cdp('Emulation.setDeviceMetricsOverride', CELULAR);
+      // Toque real (touchstart/touchend), não clique de mouse.
+      return cdp('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 });
+    },
+    toque: true,
     espera: { js: true, patinhas: 'animadas', cursosExpandem: true, menu: true, whatsapp: true, hamburger: true },
   },
   celularSemJs: {
@@ -121,7 +126,7 @@ const ESTADO = `(() => {
   };
 })()`;
 
-async function rodarCenario(porta, { preparar }) {
+async function rodarCenario(porta, { preparar, toque = false }) {
   const alvo = await (await fetch(`http://127.0.0.1:${porta}/json/new?about:blank`, { method: 'PUT' })).json();
   const { ws, cdp, avaliar, erros } = await conectar(alvo.webSocketDebuggerUrl);
   await cdp('Runtime.enable');
@@ -151,6 +156,42 @@ async function rodarCenario(porta, { preparar }) {
   })()`);
 
   r.whatsapp = await avaliar(`(() => { const a = document.querySelector('[data-wa="course"]'); return !!a && a.href.includes('text='); })()`);
+
+  // Carrossel de depoimentos: rola até ele (fora da tela ele pausa de
+  // propósito) e mede se o trilho se desloca, antes e depois de pausar.
+  const posicao = `(() => { const t = document.querySelector('[data-marquee-track]'); return t ? new DOMMatrix(getComputedStyle(t).transform).m41 : null; })()`;
+  await avaliar(`document.querySelector('[data-marquee]')?.scrollIntoView({ block: 'center' })`);
+  await dormir(600);
+  r.carrossel = await avaliar(`(() => {
+    const m = document.querySelector('[data-marquee]');
+    return {
+      rodando: !!m && m.classList.contains('is-running'),
+      originais: m ? m.querySelectorAll('.testimonial:not([aria-hidden])').length : 0,
+      copias: m ? m.querySelectorAll('.testimonial[aria-hidden="true"]').length : 0,
+    };
+  })()`);
+  const x1 = await avaliar(posicao);
+  await dormir(1200);
+  const x2 = await avaliar(posicao);
+  r.carrossel.moveu = x1 !== null && x2 !== null && Math.abs(x2 - x1) > 5;
+
+  // Pausa SEM botão (decisão do cliente): no celular, um toque real na tela;
+  // no desktop, o foco que o teclado (Tab) daria ao carrossel.
+  if (r.carrossel.rodando) {
+    if (toque) {
+      const centro = await avaliar(`(() => { const b = document.querySelector('[data-marquee]').getBoundingClientRect(); return { x: b.left + b.width / 2, y: b.top + b.height / 2 }; })()`);
+      await cdp('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [centro] });
+      await cdp('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+    } else {
+      await avaliar(`document.querySelector('[data-marquee]').focus()`);
+    }
+    await dormir(300);
+    r.carrossel.focado = await avaliar(`document.activeElement === document.querySelector('[data-marquee]')`);
+    const p1 = await avaliar(posicao);
+    await dormir(1000);
+    const p2 = await avaliar(posicao);
+    r.carrossel.pausou = Math.abs(p2 - p1) < 1;
+  }
   r.erros = erros.filter(Boolean);
 
   ws.close();
@@ -190,6 +231,19 @@ function verificar(r, e) {
     exigir(r.cursosVisiveis === r.totalCursos, `sem JS, todos os ${r.totalCursos} cursos devem aparecer (apareceram ${r.cursosVisiveis})`);
     exigir(!r.botaoCursos, 'sem JS, o botão "Ver mais" não deve aparecer');
   }
+  // Carrossel: em movimento sempre que há JS e não há pedido de menos movimento.
+  const c = r.carrossel || {};
+  exigir(c.originais === 5, `carrossel deveria ter 5 depoimentos originais, tem ${c.originais}`);
+  if (e.js && !e.carrosselParado) {
+    exigir(c.rodando && c.moveu, 'carrossel de depoimentos não está se movendo');
+    exigir(c.copias === 5, `loop sem emenda precisa de 5 cópias, há ${c.copias}`);
+    exigir(c.focado, 'o carrossel não recebeu foco (toque/teclado) — sem isso não há como pausar');
+    exigir(c.pausou, 'o carrossel não pausou com toque/foco');
+  } else {
+    exigir(!c.rodando && !c.moveu, 'carrossel deveria estar parado');
+    exigir(c.copias === 0, 'carrossel parado não deveria ter cópias');
+  }
+
   if (e.menu) exigir(r.menu, 'menu mobile não abre/fecha com ESC');
   if (e.whatsapp) exigir(r.whatsapp, 'link de WhatsApp sem mensagem pré-preenchida');
   if ('hamburger' in e) exigir(r.hamburger === e.hamburger, `hamburger deveria estar ${e.hamburger ? 'visível' : 'oculto'}`);
