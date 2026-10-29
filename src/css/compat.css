@@ -39,26 +39,23 @@
     }
   }
 
-  /* Faixa de imagem dos cards de curso (16/10). */
+  /* Faixa de imagem dos cards de curso (40/21). */
   .course-card__media {
-    height: 200px;
+    height: 190px;
   }
 
-  /* Placeholders com conteúdo em fluxo já têm alguma altura; o mínimo
-     garante que não fiquem achatados. */
-  .hero__media .media-placeholder {
-    min-height: 400px;
+  /* Fotos com imagem posicionada de forma absoluta precisam de altura
+     explícita quando aspect-ratio não existe. */
+  .hero__photo {
+    height: 420px;
   }
 
-  .about__gallery .media-placeholder {
-    min-height: 150px;
+  .about__gallery .photo {
+    height: 170px;
   }
 
-  .about__gallery .media-placeholder:first-child {
-    min-height: 220px;
+  .about__gallery .photo:first-child {
+    height: 240px;
   }
 
-  .sponsor {
-    min-height: 140px;
-  }
 }

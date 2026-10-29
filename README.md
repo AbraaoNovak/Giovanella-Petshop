@@ -41,6 +41,20 @@ Para rodar os testes automatizados:
 npm test
 ```
 
+Para testar o site em navegadores reais (Edge, Chrome e Brave instalados na
+máquina) em 8 cenários — normal, menos movimento, aparelho fraco, alto
+contraste, JavaScript bloqueado/desativado e celular:
+
+```bash
+npm run test:navegadores
+```
+
+Para reprocessar as fotos depois de trocar um original (ver seção 9):
+
+```bash
+npm run fotos
+```
+
 ## 5. Como gerar build
 
 ```bash
@@ -78,15 +92,22 @@ O resultado é um site **100% estático**: qualquer hospedagem serve.
 ├── privacidade.html        # Política de Privacidade (LGPD)
 ├── vite.config.js          # Configuração do build
 ├── .env.example            # Modelo das variáveis de ambiente
+├── fotos/                  # ORIGINAIS das fotos (não vão para o site)
+│   ├── destaque/ estrutura/ equipe/ cursos/ galeria/ parceiros/
+│   └── nao-utilizadas/
 ├── public/                 # Copiado para a raiz do site, sem processamento
 │   ├── favicon.svg
 │   ├── robots.txt
 │   ├── sitemap.xml
-│   └── img/
-│       └── Logo-Giovanella.png
-├── scripts/                # Testes automatizados (Node puro)
-│   ├── test-whatsapp.mjs
-│   └── test-paws.mjs
+│   └── img/                # Fotos OTIMIZADAS — geradas por `npm run fotos`
+│       ├── Logo-Giovanella.png
+│       └── cursos/ destaque/ equipe/ estrutura/ galeria/ parceiros/ social/
+├── scripts/
+│   ├── otimizar-fotos.mjs  # Recorta e converte as fotos (npm run fotos)
+│   ├── test-whatsapp.mjs   # Testes unitários (npm test)
+│   ├── test-paws.mjs
+│   ├── test-env.mjs
+│   └── test-navegadores.mjs # Testes em Edge/Chrome/Brave reais
 └── src/
     ├── css/
     │   ├── main.css        # Ponto de entrada — importa os demais
@@ -94,7 +115,8 @@ O resultado é um site **100% estático**: qualquer hospedagem serve.
     │   ├── base.css        # Reset, tipografia base, acessibilidade
     │   ├── components.css  # Botões, header, menu, cards, formulário, footer
     │   ├── sections.css    # Layout de cada seção
-    │   └── animations.css  # Scroll reveal, patinhas, reduced-motion
+    │   ├── animations.css  # Scroll reveal, patinhas, reduced-motion
+    │   └── compat.css      # Fallbacks para navegadores antigos
     └── js/
         ├── main.js         # Ponto de entrada
         ├── config/
@@ -103,6 +125,7 @@ O resultado é um site **100% estático**: qualquer hospedagem serve.
             ├── analytics.js     # GA4 condicional + eventos
             ├── config-bind.js   # Sincroniza o HTML com a configuração
             ├── consent.js       # Banner LGPD
+            ├── courses.js       # Botão "Ver todos os cursos"
             ├── env.js           # Detecção de reduced-motion / device fraco
             ├── form.js          # Formulário de interesse → WhatsApp
             ├── header.js        # Header fixo, adaptativo, seção ativa
@@ -129,19 +152,44 @@ Substitua por uma versão quadrada da logo quando houver.
 
 ## 9. Como trocar as imagens
 
-Todo espaço de foto é um bloco `<div class="media-placeholder">` marcado com
-`TODO: INSERIR FOTO ...`. Para publicar a foto real, coloque um `<img>` **dentro**
-do bloco — ele cobre o placeholder automaticamente:
+As fotos seguem um fluxo em duas pastas:
 
-```html
-<div class="media-placeholder">
-  <img src="/img/fachada.webp" alt="Fachada da escola em Joinville"
-       width="1000" height="1200" loading="lazy" />
-</div>
+| Pasta | Conteúdo | Vai para o site? |
+| --- | --- | --- |
+| `fotos/` | Originais, como chegaram (WhatsApp, celular) | **Não** |
+| `public/img/` | Versões otimizadas, recortadas, em WebP + JPEG/PNG | Sim |
+
+A conversão é feita por um único comando:
+
+```bash
+npm run fotos
 ```
 
-Recomendações: exporte em **WebP** (ou AVIF), sempre informe `width`/`height`,
-e use `loading="lazy"` em tudo que não aparece na primeira tela.
+Ele lê `fotos/`, aplica os recortes definidos em `scripts/otimizar-fotos.mjs`,
+gera WebP (principal) e JPEG/PNG (fallback para navegadores antigos) e imprime
+largura × altura de cada saída. **Nunca edite `public/img/` à mão** — rode o
+comando de novo.
+
+| Onde aparece | Original em `fotos/` | Observação |
+| --- | --- | --- |
+| Foto do topo | `destaque/instrutora-em-aula.jpg` | Carrega com prioridade (é o maior elemento da tela) |
+| Sobre → mosaico | `estrutura/*.jpg`, `equipe/instrutora.jpg` | Fachada larga (16:9) + quatro quadrados |
+| Cursos | `cursos/<curso>.jpg` (o pôster inteiro) | O script recorta só a foto do pôster |
+| Galeria | `galeria/NN-descricao.jpg` | Proporção original preservada |
+| Patrocinadores | `parceiros/*.jpg` | Logos com fundo transparente |
+| Compartilhamento (WhatsApp, redes) | `estrutura/fachada.jpg` | Gera `img/social/og-image.jpg`, 1200×630 |
+
+`fotos/nao-utilizadas/` guarda o que ficou de fora — hoje, uma foto de
+samoieda com apenas 224 px, pequena demais para o site.
+
+**Para trocar uma foto existente:** substitua o original em `fotos/` mantendo
+o nome e rode `npm run fotos`. Se as proporções mudarem, revise o recorte no
+script e os atributos `width`/`height` no HTML.
+
+> **Fotos dos cursos e direitos de uso.** As imagens dos cards foram recortadas
+> dos pôsteres enviados pela escola e parecem ser de banco de imagens (em uma
+> delas, a de tintura, aparece a marca de outra empresa na roupa da pessoa).
+> Antes de publicar, confirme que a licença dessas imagens permite uso no site.
 
 ## 9b. Posicionamento: escola, não loja
 
@@ -177,14 +225,28 @@ lembre de atualizar também o `<link>` do Google Fonts nos **dois** arquivos HTM
 
 ## 11. Como adicionar cursos
 
-Em `index.html`, seção `#cursos`: duplique um bloco `<article class="card course-card">`
-e ajuste:
+Os 18 cursos atuais foram **transcritos dos pôsteres oficiais**: a foto de cada
+card é recortada do pôster, e o texto é HTML de verdade — indexável pelo Google
+e lido por leitores de tela, o que a arte do pôster não seria.
 
-- o `<h3 class="card__title">` (nome do curso);
-- o parágrafo de descrição e a lista `course-card__list`;
-- as `<span class="tag">` (carga horária, modalidade);
-- **o atributo `data-course` do botão** — é ele que entra na mensagem do WhatsApp;
-- remova o `<span class="placeholder-note">`.
+Para adicionar um curso:
+
+1. coloque o pôster em `fotos/cursos/<nome-do-curso>.jpg`, acrescente o nome à
+   lista `CURSOS` em `scripts/otimizar-fotos.mjs` e rode `npm run fotos`
+   (pôsteres no mesmo modelo usam o mesmo recorte automaticamente);
+2. em `index.html`, seção `#cursos`, duplique um `<article class="card course-card">`
+   e ajuste a imagem, o `<h3 class="card__title">`, as `<span class="tag">`
+   (horas e modalidade), a lista `course-card__list` e **o atributo
+   `data-course` do botão** — é ele que entra na mensagem do WhatsApp;
+3. acrescente o curso ao `<optgroup label="Cursos">` do formulário de contato;
+4. acrescente-o ao segundo bloco JSON-LD do `<head>` (tipo `Course`), que
+   informa os cursos ao Google.
+
+> **Ajustes feitos na transcrição.** Erros de digitação dos pôsteres foram
+> corrigidos ("Expecialização" → "Especialização", "Maquina" → "máquina",
+> "aulas teórica" → "aulas teóricas"). No *Banho e Tosa Assistido*, o pôster diz
+> "funcionamento de um **Pet Shop**"; no site está "funcionamento de um banho e
+> tosa", para manter a regra de não associar a escola a petshop (seção 9b).
 
 ```html
 <a class="btn btn--whatsapp btn--block"
@@ -223,6 +285,30 @@ todos os cursos, não apenas os quatro visíveis. Eles são recolhidos por CSS
 `<head>` — antes da primeira pintura, para não haver piscada. Sem JavaScript,
 todos os cursos aparecem e o botão não é exibido. **Não troque esse mecanismo
 por `hidden` no HTML**: isso tornaria os cursos inacessíveis sem JavaScript.
+
+## 11b. Como adicionar fotos à galeria e parceiros
+
+**Galeria** (seção `#galeria`, "Turmas, conclusões e procedimentos"):
+
+1. coloque o original em `fotos/galeria/` com um prefixo numérico
+   (`09-conclusao-curso-spitz.jpg`) — ele define a ordem;
+2. acrescente-o à lista `GALERIA` em `scripts/otimizar-fotos.mjs`;
+3. rode `npm run fotos` e anote largura × altura impressas;
+4. no `index.html`, duplique um `<figure class="gallery__item">`, troque os
+   caminhos, `width`/`height`, o `alt` (descreva o que se vê na foto) e a legenda.
+
+Use uma das tags existentes — **Conclusão de curso**, **Turma**, **Procedimento**
+— para manter a galeria consistente. A grade é em colunas e preserva a proporção
+de cada foto, então fotos em pé e deitadas podem ser misturadas à vontade.
+
+> Publique fotos de alunos apenas com autorização deles (LGPD — uso de imagem).
+
+**Patrocinadores** (seção `#patriocinio`): o logotipo vai em `fotos/parceiros/`,
+registrado no script com `logo: true` (gera PNG transparente). Se o parceiro
+tiver site, envolva o `<figure class="sponsor">` num link
+`<a href="..." target="_blank" rel="noopener noreferrer">`. Logos circulares
+recebem também a classe `sponsor--round`, que compensa a margem interna do
+círculo.
 
 ## 12. Como adicionar depoimentos
 
@@ -336,23 +422,26 @@ mobile, título da seção e footer acompanham. (O `id="patriocinio"` da seção
 
 **Conteúdo**
 - [ ] Substituir todos os `TODO:` (busque no projeto — nenhum selo laranja pode sobrar)
-- [ ] Inserir os cursos reais (nome, carga horária, modalidade, público-alvo)
+- [x] Inserir os cursos reais (18 cursos, transcritos dos pôsteres)
+- [ ] Confirmar a licença das fotos de banco de imagens usadas nos cursos
 - [ ] Inserir depoimentos reais, com autorização
-- [ ] Inserir fotos reais em WebP/AVIF, com `width`/`height`
-- [ ] Inserir logos dos parceiros
+- [x] Inserir fotos reais (estrutura, equipe, galeria) em WebP, com `width`/`height`
+- [ ] Obter autorização de uso de imagem dos alunos que aparecem na galeria
+- [x] Inserir logos dos parceiros (Eco Dog e Litoral Pet)
+- [ ] Pedir logos em alta resolução (o da Eco Dog veio com apenas 98 px)
 - [ ] Revisar a Política de Privacidade com apoio jurídico e indicar o encarregado
 
 **Configuração**
 - [ ] Trocar o domínio provisório em: `index.html` (canonical, Open Graph, Schema),
       `privacidade.html`, `public/robots.txt`, `public/sitemap.xml` e
       `site.config.js` → `siteUrl`
-- [ ] Criar a imagem social 1200×630 e apontar a `og:image` para ela
+- [x] Criar a imagem social 1200×630 e apontar a `og:image` para ela
 - [ ] Gerar `apple-touch-icon.png` (180×180) e favicon quadrado
 - [ ] Preencher o CEP e os horários de funcionamento no Schema.org
 - [ ] Configurar o GA4 (opcional)
 
 **Técnico**
-- [ ] `npm test` e `npm run build` sem erros
+- [ ] `npm test`, `npm run test:navegadores` e `npm run build` sem erros
 - [ ] HTTPS ativo com redirecionamento de `http://`
 - [ ] Testar em Chrome, Safari, Firefox e Edge; iOS e Android reais
 - [ ] Testar o WhatsApp em celular (deve abrir o app, não o navegador)
