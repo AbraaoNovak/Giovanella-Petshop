@@ -695,12 +695,14 @@
             <p class="section__eyebrow" data-reveal>Sobre a escola</p>
             <h2 id="sobre-title" data-reveal>Uma escola feita para quem leva o cuidado a sério</h2>
 
+            <!-- Textos desta seção: adaptados do "Sobre" do site anterior da
+                 escola (fornecido pelo cliente). A menção à origem comercial
+                 da escola foi retirada, conforme o posicionamento (README 9b). -->
             <p class="section__lead" data-reveal>
-              <!-- TODO: INSERIR HISTÓRIA DA ESCOLA -->
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur blandit tempus
-              porttitor. Nullam quis risus eget urna mollis ornare vel eu leo. Donec ullamcorper
-              nulla non metus auctor fringilla.
-              <span class="placeholder-note">TODO: história da escola</span>
+              A Giovanella nasceu para elevar o padrão do banho e tosa. Para nós, habilidade não é
+              raspar um cão: é entregar uma tosa de luxo, bem&#8209;acabada e em pouco tempo, e uma
+              manutenção semanal eficaz — conhecendo a fundo produtos de alta qualidade para que
+              cada pet tenha pelos bem cuidados e hidratados.
             </p>
 
             <div class="values">
@@ -713,9 +715,8 @@
                 <div>
                   <h3 class="value__title">Missão</h3>
                   <p class="value__text">
-                    <!-- TODO: INSERIR MISSÃO -->
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id ligula
-                    porta felis euismod semper.
+                    Colocar no mercado profissionais de alta qualidade, prontos para atender às
+                    necessidades de cada cliente — inclusive dos mais exigentes.
                   </p>
                 </div>
               </div>
@@ -729,9 +730,9 @@
                 <div>
                   <h3 class="value__title">Valores</h3>
                   <p class="value__text">
-                    <!-- TODO: INSERIR VALORES -->
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a
-                    ante venenatis dapibus.
+                    Inovação e bem-estar animal. Ensinamos uma visão humanizada: trabalhar sem
+                    focinheiras, contenção, gaiolas ou técnicas de sedação, respeitando os
+                    sentimentos do animal sem perder o profissionalismo e o cuidado com os pelos.
                   </p>
                 </div>
               </div>
@@ -745,9 +746,8 @@
                 <div>
                   <h3 class="value__title">Formação profissional</h3>
                   <p class="value__text">
-                    <!-- TODO: INSERIR DIFERENCIAIS / EXPERIÊNCIA / ESTRUTURA -->
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras justo odio,
-                    dapibus ac facilisis in.
+                    Aulas teóricas para conhecer a fundo os produtos e as raças, e aulas práticas
+                    para desenvolver a técnica de tesoura e a criatividade com os equipamentos.
                   </p>
                 </div>
               </div>
@@ -1940,9 +1940,13 @@
       </section>
 
       <!-- ================================================================
-           DEPOIMENTOS
-           IMPORTANTE: os depoimentos abaixo são EXEMPLOS de layout.
-           Nenhuma avaliação real do Google é exibida ou inventada.
+           DEPOIMENTOS — avaliações REAIS do perfil da escola no Google
+           Transcritas literalmente (grafia e emojis originais). Não edite o
+           texto de uma avaliação: corte-a ou mantenha-a como está.
+           Nome exibido: primeiro nome + inicial do sobrenome (privacidade).
+           Para adicionar: duplique um <article class="testimonial">.
+           Schema.org: avaliações de terceiros NÃO podem ser marcadas como
+           Review/AggregateRating do próprio site (diretrizes do Google).
            ================================================================ -->
       <section class="section section--alt" id="depoimentos" aria-labelledby="depoimentos-title">
         <div class="container">
@@ -1950,18 +1954,17 @@
             <p class="section__eyebrow" data-reveal>Depoimentos</p>
             <h2 id="depoimentos-title" data-reveal>O que dizem sobre a escola</h2>
             <p class="section__lead" data-reveal>
-              <!-- TODO: INSERIR DEPOIMENTOS REAIS -->
-              Os cartões abaixo mostram apenas o formato. Substitua por depoimentos reais, com
-              autorização das pessoas citadas.
-              <span class="placeholder-note">TODO: depoimentos reais</span>
+              Avaliações de alunos no Google, com as palavras de quem já passou pelas nossas
+              turmas.
             </p>
           </div>
 
-          <div class="grid">
-            <!-- ---------- Testimonial Card 1 ---------- -->
-            <article class="testimonial" data-reveal>
-              <span class="placeholder-note">Exemplo — TODO: substituir</span>
-              <div class="testimonial__stars" role="img" aria-label="Exemplo de avaliação: 5 de 5 estrelas">
+          <!-- Layout em colunas: cada card tem a altura do próprio texto,
+               sem os espaços vazios que uma grade de alturas iguais criaria
+               com depoimentos de tamanhos tão diferentes. -->
+          <div class="testimonials" data-reveal>
+            <article class="testimonial">
+              <div class="testimonial__stars" role="img" aria-label="Avaliação: 5 de 5 estrelas">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
@@ -1969,22 +1972,60 @@
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
               </div>
               <blockquote class="testimonial__quote">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque
-                penatibus et magnis dis parturient montes.
+                <p>Professora Rosi extremamente maravilhosa, dedicada ao seu trabalho e alunos me ensinou tudo muito bem, queria agradecer a Laís e Edinei também que me acolheram super bem! 🫶🫶</p>
+              </blockquote>
+              <div class="testimonial__person">
+                <span class="testimonial__avatar" aria-hidden="true">G</span>
+                <span>
+                  <span class="testimonial__name">Gabriella P.</span>
+                  <span class="testimonial__role">Avaliação no Google</span>
+                </span>
+              </div>
+            </article>
+
+            <article class="testimonial">
+              <div class="testimonial__stars" role="img" aria-label="Avaliação: 5 de 5 estrelas">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
+              </div>
+              <blockquote class="testimonial__quote">
+                <p>Super recomendado e sem falar como é uma escola profissional e com a Professora Rosi que é incrível. Entrei sem saber nada e estou saindo um profissional 🥰🤩</p>
+              </blockquote>
+              <div class="testimonial__person">
+                <span class="testimonial__avatar" aria-hidden="true">R</span>
+                <span>
+                  <span class="testimonial__name">Romário G.</span>
+                  <span class="testimonial__role">Avaliação no Google</span>
+                </span>
+              </div>
+            </article>
+
+            <article class="testimonial">
+              <div class="testimonial__stars" role="img" aria-label="Avaliação: 5 de 5 estrelas">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
+              </div>
+              <blockquote class="testimonial__quote">
+                <p>As aulas são muito boas e todas práticas para os alunos aprenderem ainda mais, estou amando fazer o curso de Estética Animal e ansiosa para me formar! Pretendo fazer outros de especializações e Auxiliar Veterinário também que a escola oferece 👏💖💗</p>
               </blockquote>
               <div class="testimonial__person">
                 <span class="testimonial__avatar" aria-hidden="true">A</span>
                 <span>
-                  <span class="testimonial__name">TODO: nome do aluno</span><br />
-                  <span class="testimonial__role">TODO: curso realizado</span>
+                  <span class="testimonial__name">Andrieli O.</span>
+                  <span class="testimonial__role">Curso de Estética Animal</span>
+                  <span class="testimonial__role">Avaliação no Google</span>
                 </span>
               </div>
             </article>
 
-            <!-- ---------- Testimonial Card 2 ---------- -->
-            <article class="testimonial" data-reveal>
-              <span class="placeholder-note">Exemplo — TODO: substituir</span>
-              <div class="testimonial__stars" role="img" aria-label="Exemplo de avaliação: 5 de 5 estrelas">
+            <article class="testimonial">
+              <div class="testimonial__stars" role="img" aria-label="Avaliação: 5 de 5 estrelas">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
@@ -1992,22 +2033,20 @@
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
               </div>
               <blockquote class="testimonial__quote">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sagittis lacus vel
-                augue laoreet rutrum faucibus dolor auctor.
+                <p>Professores super atenciosos, estão sempre ao seu lado para todas as dúvidas para indicar a forma correta de aplicar a tosa!</p>
+                <p>Espero poder voltar para fazer muitos cursos, valor acessível, local adequado e muita simpatia!</p>
               </blockquote>
               <div class="testimonial__person">
-                <span class="testimonial__avatar" aria-hidden="true">B</span>
+                <span class="testimonial__avatar" aria-hidden="true">M</span>
                 <span>
-                  <span class="testimonial__name">TODO: nome do aluno</span><br />
-                  <span class="testimonial__role">TODO: curso realizado</span>
+                  <span class="testimonial__name">Munira V.</span>
+                  <span class="testimonial__role">Avaliação no Google</span>
                 </span>
               </div>
             </article>
 
-            <!-- ---------- Testimonial Card 3 ---------- -->
-            <article class="testimonial" data-reveal>
-              <span class="placeholder-note">Exemplo — TODO: substituir</span>
-              <div class="testimonial__stars" role="img" aria-label="Exemplo de avaliação: 5 de 5 estrelas">
+            <article class="testimonial">
+              <div class="testimonial__stars" role="img" aria-label="Avaliação: 5 de 5 estrelas">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
@@ -2015,26 +2054,28 @@
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7.1L22 9.2l-7.2-.6L12 2z"/></svg>
               </div>
               <blockquote class="testimonial__quote">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam porta sem malesuada
-                magna mollis euismod.
+                <p>Ta maravilhosa a experiência todos são ótimos os professores.</p>
               </blockquote>
               <div class="testimonial__person">
-                <span class="testimonial__avatar" aria-hidden="true">C</span>
+                <span class="testimonial__avatar" aria-hidden="true">V</span>
                 <span>
-                  <span class="testimonial__name">TODO: nome do aluno</span><br />
-                  <span class="testimonial__role">TODO: curso realizado</span>
+                  <span class="testimonial__name">Vanessa V.</span>
+                  <span class="testimonial__role">Avaliação no Google</span>
                 </span>
               </div>
             </article>
           </div>
 
-          <!-- ============================================================
-               ÁREA RESERVADA PARA AVALIAÇÕES REAIS DO GOOGLE
-               Nenhuma avaliação é exibida enquanto não houver integração
-               oficial. Ver README → "Como integrar avaliações Google".
-               TODO: CONFIGURAR GOOGLE REVIEWS
-               ============================================================ -->
-          <div data-google-reviews hidden></div>
+          <p class="testimonials__more" data-reveal>
+            <a
+              class="btn btn--secondary"
+              href="https://www.google.com/maps/search/?api=1&query=Giovanella%20Escola%20Est%C3%A9tica%20Animal%2C%20Rua%20Elly%20Soares%2C%20511%2C%20Joinville%20-%20SC"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-track="avaliacoes_google_clique"
+              >Ver todas as avaliações no Google</a
+            >
+          </p>
         </div>
       </section>
 

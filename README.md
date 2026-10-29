@@ -312,11 +312,29 @@ círculo.
 
 ## 12. Como adicionar depoimentos
 
-Em `index.html`, seção `#depoimentos`: duplique um `<article class="testimonial">`,
-troque a citação, o nome, o curso e a inicial do avatar, e **remova o
-`placeholder-note`**. Ajuste o `aria-label` das estrelas para a nota real.
+A seção `#depoimentos` mostra **avaliações reais do perfil da escola no Google**,
+copiadas manualmente. Para adicionar uma, duplique um `<article class="testimonial">`
+e troque o texto, o nome e a inicial do avatar. Se a nota não for 5, ajuste o
+número de estrelas e o `aria-label`.
 
-> Publique apenas depoimentos verdadeiros e com autorização das pessoas citadas.
+Regras seguidas, e que valem manter:
+
+- **Texto literal.** Grafia e emojis originais. Não "melhore" a avaliação de
+  alguém; se não servir, simplesmente não a publique.
+- **Nome curto.** Primeiro nome + inicial do sobrenome, por privacidade (LGPD).
+- **Sem data.** O Google mostra "há 4 meses", que envelheceria num site estático.
+- **Curso só se a própria avaliação o citar.** Hoje, apenas uma cita
+  ("Curso de Estética Animal").
+- **Sem marcação Schema.org.** Avaliações de terceiros não podem virar
+  `Review`/`AggregateRating` do próprio site (diretrizes do Google).
+
+> Uma avaliação recebida ficou de fora de propósito: trata do banho de uma
+> cadela no "pet-shop Giovanella", não da escola, e contradiz o posicionamento
+> da seção 9b.
+
+O botão "Ver todas as avaliações no Google" abre uma busca no Google Maps pelo
+nome e endereço da escola. **Troque pelo link direto do perfil** (no Google
+Maps: perfil da escola → Compartilhar → Copiar link).
 
 ## 13. Como configurar o Google Analytics
 
@@ -366,11 +384,9 @@ no Google Cloud Console e ajuste `src/js/modules/map.js`.
 
 ## 15. Como integrar avaliações Google
 
-O site **não exibe nenhuma avaliação** hoje — nada foi inventado e não há
-scraping (proibido pelos termos do Google). O espaço está reservado em
-`index.html` (`<div data-google-reviews hidden>`).
-
-Caminhos oficiais para publicar avaliações reais:
+Hoje as avaliações são **copiadas manualmente** do perfil da escola (seção 12) —
+sem scraping, que é proibido pelos termos do Google. Para que elas se
+atualizem sozinhas, os caminhos oficiais são:
 
 1. **Google Places API — Place Details** (recomendado). Retorna até 5 avaliações.
    Exige chave *server-side*: crie um pequeno endpoint (Netlify/Vercel Function)

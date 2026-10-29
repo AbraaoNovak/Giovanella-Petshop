@@ -576,6 +576,26 @@ html:not(.js) .hamburger {
 /* --------------------------------------------------------------------------
    TESTIMONIAL CARD
    -------------------------------------------------------------------------- */
+/* Contêiner em colunas (layout "masonry"): cada card tem a altura do próprio
+   texto. Depoimentos variam de uma linha a um parágrafo inteiro; numa grade
+   de alturas iguais sobrariam grandes vazios nos cards curtos. */
+.testimonials {
+  column-count: 1;
+  column-gap: var(--space-md);
+}
+
+@media (min-width: 700px) {
+  .testimonials {
+    column-count: 2;
+  }
+}
+
+@media (min-width: 1100px) {
+  .testimonials {
+    column-count: 3;
+  }
+}
+
 .testimonial {
   background: var(--color-white);
   border: 1px solid var(--color-border);
@@ -584,7 +604,17 @@ html:not(.js) .hamburger {
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
-  height: 100%;
+  /* Nas colunas: largura total, sem partir o card entre colunas. */
+  width: 100%;
+  margin: 0 0 var(--space-md);
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.testimonials__more {
+  margin-top: var(--space-md);
+  text-align: center;
 }
 
 .testimonial__stars {
@@ -603,6 +633,11 @@ html:not(.js) .hamburger {
   font-size: 1.02rem;
   color: var(--color-text);
   margin: 0;
+}
+
+/* Avaliações com mais de um parágrafo (quebra de linha original). */
+.testimonial__quote p + p {
+  margin-top: 0.6em;
 }
 
 .testimonial__person {
@@ -626,13 +661,17 @@ html:not(.js) .hamburger {
 }
 
 .testimonial__name {
+  display: block;
   font-weight: 700;
   font-size: 0.95rem;
   line-height: 1.2;
 }
 
 .testimonial__role {
+  display: block;
+  margin-top: 0.15rem;
   font-size: var(--step--1);
+  line-height: 1.35;
   color: var(--color-text-muted);
 }
 
