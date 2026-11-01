@@ -14,7 +14,7 @@
  */
 
 import { spawn } from 'node:child_process';
-import { existsSync, mkdtempSync, rmSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { preview } from 'vite';
@@ -39,6 +39,7 @@ const CELULAR = { width: 390, height: 844, deviceScaleFactor: 2, mobile: true };
 const CENARIOS = {
   normal: {
     preparar: async () => {},
+    carregarMapa: true,
     espera: { js: true, patinhas: 'animadas', cursosExpandem: true, menu: true, whatsapp: true },
   },
   reduzirMovimento: {
@@ -126,11 +127,15 @@ const ESTADO = `(() => {
   };
 })()`;
 
-async function rodarCenario(porta, { preparar, toque = false }) {
+async function rodarCenario(porta, { preparar, toque = false, carregarMapa = false }) {
   const alvo = await (await fetch(`http://127.0.0.1:${porta}/json/new?about:blank`, { method: 'PUT' })).json();
   const { ws, cdp, avaliar, erros } = await conectar(alvo.webSocketDebuggerUrl);
   await cdp('Runtime.enable');
   await cdp('Page.enable');
+  // Registra bloqueios da CSP antes de qualquer script da página rodar.
+  await cdp('Page.addScriptToEvaluateOnNewDocument', {
+    source: "window.__csp = []; document.addEventListener('securitypolicyviolation', (e) => window.__csp.push(e.violatedDirective + ' -> ' + (e.blockedURI || 'inline')));",
+  });
   await preparar(cdp);
   await cdp('Page.navigate', { url: SITE });
   await dormir(3500); // inicialização + requestIdleCallback das patinhas
@@ -192,6 +197,14 @@ async function rodarCenario(porta, { preparar, toque = false }) {
     const p2 = await avaliar(posicao);
     r.carrossel.pausou = Math.abs(p2 - p1) < 1;
   }
+  // Mapa do Google: o recurso externo mais sensível à CSP (frame-src).
+  if (carregarMapa) {
+    await avaliar("document.querySelector('[data-map-facade]')?.click()");
+    await dormir(2500);
+    r.mapa = await avaliar("!!document.querySelector('[data-map] iframe')");
+  }
+
+  r.bloqueiosCsp = (await avaliar('window.__csp')) || [];
   r.erros = erros.filter(Boolean);
 
   ws.close();
@@ -210,6 +223,8 @@ function verificar(r, e) {
   exigir(r.imagensQuebradas === 0, `${r.imagensQuebradas} imagem(ns) quebrada(s)`);
   exigir(r.conteudoOculto === 0, `${r.conteudoOculto} bloco(s) de conteúdo invisível(is) na tela`);
   exigir(r.erros.length === 0, `erros no console: ${r.erros.join(' | ')}`);
+  exigir(r.bloqueiosCsp.length === 0, `a CSP bloqueou: ${r.bloqueiosCsp.join(' | ')}`);
+  if ('mapa' in r) exigir(r.mapa, 'o mapa do Google não carregou');
 
   if (e.patinhas === 'animadas') {
     exigir(r.trilhasVisiveis > 0 && r.trilhasEstaticas === 0, 'patinhas deveriam estar animadas');
@@ -258,7 +273,19 @@ if (!NAVEGADORES.length) {
   process.exit(0);
 }
 
-const servidor = await preview({ preview: { port: PORTA_SITE, strictPort: true, host: '127.0.0.1', open: false }, logLevel: 'silent' });
+// Serve o build com os MESMOS cabeçalhos da produção (vercel.json), incluindo
+// a CSP: um bloqueio indevido quebraria o site em silêncio.
+const vercel = JSON.parse(readFileSync(new URL('../vercel.json', import.meta.url), 'utf8'));
+const cabecalhos = Object.fromEntries(
+  vercel.headers.find((h) => h.source === '/(.*)' && !h.has).headers.map((h) => [h.key, h.value])
+);
+// Sem HTTPS no teste local, upgrade-insecure-requests e HSTS não se aplicam.
+cabecalhos['Content-Security-Policy'] = cabecalhos['Content-Security-Policy'].replace(/;\s*upgrade-insecure-requests/, '');
+delete cabecalhos['Strict-Transport-Security'];
+const servidor = await preview({
+  preview: { port: PORTA_SITE, strictPort: true, host: '127.0.0.1', open: false, headers: cabecalhos },
+  logLevel: 'silent',
+});
 let totalFalhas = 0;
 let porta = 9520;
 

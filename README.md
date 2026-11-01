@@ -16,8 +16,9 @@ Foco em conversão por **WhatsApp** e **telefone**, apresentação dos cursos e 
 | Marcação | HTML5 semântico | Todo o conteúdo está no HTML — melhor SEO e funciona sem JS |
 | Estilo | CSS moderno (custom properties, Grid, Flexbox, `clamp()`) | Sem framework: menos peso, controle total do design system |
 | Comportamento | JavaScript ES modules (vanilla) | ~5 KB gzip no total, sem dependências de runtime |
-| Build | [Vite](https://vitejs.dev) 5 | Servidor de desenvolvimento e minificação/hash de assets |
-| Fontes | Google Fonts (Fraunces + Inter) com `display=swap` | Evita texto invisível e protege o LCP |
+| Build | [Vite](https://vitejs.dev) 6 | Servidor de desenvolvimento e minificação/hash de assets |
+| Fonte | Inter servida pelo próprio site ([Fontsource](https://fontsource.org), licença OFL) | Sem requisição ao Google ao abrir a página (privacidade e CSP estrita); texto aparece mais rápido |
+| Hospedagem | [Vercel](https://vercel.com), configurada em `vercel.json` | Cabeçalhos de segurança, cache e redirecionamentos do site antigo |
 
 **Nenhuma dependência de runtime.** O `node_modules` existe apenas para o build.
 
@@ -55,6 +56,19 @@ Para reprocessar as fotos depois de trocar um original (ver seção 9):
 npm run fotos
 ```
 
+Para a auditoria de segurança automatizada (seção 21):
+
+```bash
+npm run test:seguranca
+```
+
+Para gerar capturas de tela de cada seção, em várias larguras, na pasta
+`capturas/` (útil para revisar o visual depois de uma mudança):
+
+```bash
+npm run capturas
+```
+
 ## 5. Como gerar build
 
 ```bash
@@ -72,10 +86,15 @@ npm run preview
 
 O resultado é um site **100% estático**: qualquer hospedagem serve.
 
-**Netlify / Vercel / Cloudflare Pages**
+**Vercel (hospedagem atual).** Tudo está em `vercel.json` — build, pasta de
+saída, cabeçalhos de segurança, cache e redirecionamentos. Cada `git push` na
+`main` publica sozinho. Variáveis de ambiente: ver seção 13 (opcionais).
+
+**Netlify / Cloudflare Pages**
 - Comando de build: `npm run build`
 - Diretório de publicação: `dist`
-- Variáveis de ambiente: ver seção 13 (opcionais)
+- Os cabeçalhos e redirecionamentos do `vercel.json` precisam ser recriados
+  no formato de cada plataforma (`_headers` / `_redirects`).
 
 **Hospedagem tradicional (cPanel, FTP)**
 1. Rode `npm run build` na sua máquina.
@@ -90,6 +109,8 @@ O resultado é um site **100% estático**: qualquer hospedagem serve.
 .
 ├── index.html              # Página principal (todo o conteúdo do site)
 ├── privacidade.html        # Política de Privacidade (LGPD)
+├── 404.html                # Página de "não encontrado" (noindex)
+├── vercel.json             # Segurança (CSP etc.), cache e redirecionamentos do Wix
 ├── vite.config.js          # Configuração do build
 ├── .env.example            # Modelo das variáveis de ambiente
 ├── fotos/                  # ORIGINAIS das fotos (não vão para o site)
@@ -107,7 +128,9 @@ O resultado é um site **100% estático**: qualquer hospedagem serve.
 │   ├── test-whatsapp.mjs   # Testes unitários (npm test)
 │   ├── test-paws.mjs
 │   ├── test-env.mjs
-│   └── test-navegadores.mjs # Testes em Edge/Chrome/Brave reais
+│   ├── test-navegadores.mjs # Testes em Edge/Chrome/Brave reais (com a CSP)
+│   ├── test-seguranca.mjs   # Auditoria de segurança do build
+│   └── capturas.mjs         # Capturas de tela para revisão visual
 └── src/
     ├── css/
     │   ├── main.css        # Ponto de entrada — importa os demais
@@ -214,9 +237,11 @@ Trocar `--color-primary` muda botões, títulos e ícones em todo o site.
 
 **Tipografia.** O site usa **uma única família** — Inter, a mesma do menu do
 header. O token `--font-display` existe apenas para permitir que títulos voltem
-a divergir no futuro; hoje ele aponta para `--font-sans`. Se trocar a fonte,
-lembre de atualizar também o `<link>` do Google Fonts nos **dois** arquivos HTML
-(`index.html` e `privacidade.html`).
+a divergir no futuro; hoje ele aponta para `--font-sans`. A fonte é instalada
+pelo pacote `@fontsource-variable/inter` e importada em `src/css/main.css`. Para
+trocá-la, instale o pacote Fontsource da nova fonte e ajuste esse import e o
+`--font-sans` — **não volte a usar o `<link>` do Google Fonts**: a CSP o
+bloquearia (seção 21) e a política de privacidade deixaria de ser verdadeira.
 
 > **Atenção ao contraste.** Dois tokens existem por acessibilidade:
 > `--color-secondary-deep` (links/textos, 6:1) e `--color-whatsapp-strong`
@@ -448,34 +473,108 @@ mobile, título da seção e footer acompanham. (O `id="patriocinio"` da seção
 ## 20. Checklist de produção
 
 **Conteúdo**
-- [ ] Substituir todos os `TODO:` (busque no projeto — nenhum selo laranja pode sobrar)
+- [x] Substituir todos os `TODO:` do site (nenhum selo laranja restante)
 - [x] Inserir os cursos reais (18 cursos, transcritos dos pôsteres)
 - [ ] Confirmar a licença das fotos de banco de imagens usadas nos cursos
-- [ ] Inserir depoimentos reais, com autorização
+- [x] Inserir depoimentos reais (avaliações do Google)
 - [x] Inserir fotos reais (estrutura, equipe, galeria) em WebP, com `width`/`height`
 - [ ] Obter autorização de uso de imagem dos alunos que aparecem na galeria
 - [x] Inserir logos dos parceiros (Eco Dog e Litoral Pet)
 - [ ] Pedir logos em alta resolução (o da Eco Dog veio com apenas 98 px)
-- [ ] Revisar a Política de Privacidade com apoio jurídico e indicar o encarregado
+- [ ] Revisar a Política de Privacidade com apoio jurídico
 
 **Configuração**
-- [ ] Trocar o domínio provisório em: `index.html` (canonical, Open Graph, Schema),
-      `privacidade.html`, `public/robots.txt`, `public/sitemap.xml` e
-      `site.config.js` → `siteUrl`
+- [x] Domínio definitivo no código (`escolabanhoetosarosigiovanella.com.br`)
+- [ ] Registrar o `.com.br` e concluir a migração do Wix (seção 22)
 - [x] Criar a imagem social 1200×630 e apontar a `og:image` para ela
-- [ ] Gerar `apple-touch-icon.png` (180×180) e favicon quadrado
-- [ ] Preencher o CEP e os horários de funcionamento no Schema.org
+- [x] Gerar `apple-touch-icon.png` (180×180)
+- [x] Preencher o CEP no Schema.org
+- [ ] Informar o horário de funcionamento para o Schema.org
 - [ ] Configurar o GA4 (opcional)
 
 **Técnico**
-- [ ] `npm test`, `npm run test:navegadores` e `npm run build` sem erros
-- [ ] HTTPS ativo com redirecionamento de `http://`
+- [x] `npm test`, `npm run test:navegadores`, `npm run test:seguranca` e
+      `npm run build` sem erros
+- [x] `npm audit` sem vulnerabilidades
+- [ ] Conferir os cabeçalhos no domínio publicado em https://securityheaders.com
+- [ ] HTTPS ativo com redirecionamento de `http://` (automático na Vercel)
 - [ ] Testar em Chrome, Safari, Firefox e Edge; iOS e Android reais
 - [ ] Testar o WhatsApp em celular (deve abrir o app, não o navegador)
 - [ ] Testar o link `tel:` em celular
 - [ ] Rodar Lighthouse (metas: Performance ≥ 90, Acessibilidade ≥ 95, SEO 100)
 - [ ] Enviar o `sitemap.xml` no Google Search Console
 - [ ] Cadastrar/atualizar o Perfil da Empresa no Google (essencial para SEO local)
+
+## 21. Segurança
+
+O site não tem servidor, banco de dados, login nem formulário que envie dados —
+a superfície de ataque é pequena por construção. Sobre ela, estas camadas:
+
+| Proteção | Onde | O que evita |
+| --- | --- | --- |
+| **CSP estrita** (Content-Security-Policy) | `vercel.json` | Execução de qualquer script, estilo ou recurso que não seja do próprio site — a principal defesa contra injeção de código (XSS) |
+| HSTS | `vercel.json` | Acesso sem HTTPS |
+| `X-Frame-Options` + `frame-ancestors` | `vercel.json` | O site ser embutido em outro para enganar cliques |
+| `nosniff`, `Referrer-Policy`, `Permissions-Policy`, COOP | `vercel.json` | Interpretação errada de arquivos, vazamento de endereço, uso de câmera/microfone/localização |
+| `form-action 'none'` + `method="post"` + formulário oculto sem JS | `vercel.json`, `index.html` | Nome e telefone indo para a URL se o JavaScript falhar |
+| `rel="noopener"` em links externos | HTML e `whatsapp.js` | A página aberta controlar a aba do site |
+| Imagens sem metadados | `npm run fotos` | GPS, modelo de celular ou nome do autor publicados nas fotos |
+| Fonte e recursos próprios | `src/css/main.css` | Requisições a terceiros ao abrir a página |
+| `X-Robots-Tag: noindex` em `*.vercel.app` | `vercel.json` | Endereços de teste da Vercel aparecendo no Google |
+| Dependências auditadas | `npm audit` | Vulnerabilidades conhecidas nas ferramentas de build |
+
+**`npm run test:seguranca`** confere tudo isso no build final e falha se algo
+regredir. Os testes de navegador rodam com a mesma CSP da produção e falham se
+ela bloquear qualquer coisa legítima.
+
+> **Ao alterar um script inline do `<head>`** (os blocos que ativam a classe
+> `.js`), o hash dele muda e a CSP passa a bloqueá-lo. Rode
+> `npm run test:seguranca`: ele mostra o hash novo, que deve substituir o
+> antigo em `script-src`, no `vercel.json`.
+
+> **Ao ativar o Google Analytics**, a CSP já libera os domínios oficiais do GA4.
+> Se usar outro serviço externo (Instagram, YouTube…), acrescente o domínio à
+> diretiva correspondente da CSP.
+
+## 22. Domínio e migração do Wix
+
+**Situação levantada em 01/11/2026:**
+
+| Item | Situação |
+| --- | --- |
+| Domínio atual | `escolabanhoetosarosigiovanella.com`, **registrado no Wix** até 12/02/2027 |
+| DNS atual | Administrado pelo Wix (`ns12`/`ns13.wixdns.net`) |
+| E-mail no domínio | Nenhum (sem registro MX) — a troca não afeta e-mail |
+| `escolabanhoetosarosigiovanella.com.br` | Livre no Registro.br |
+| Site antigo | 33 posts de blog, 8 páginas e 13 produtos de loja-modelo do Wix |
+
+**Domínio principal do site novo:** `https://www.escolabanhoetosarosigiovanella.com.br`
+(canonical, sitemap, robots, Open Graph e Schema.org já usam esse endereço).
+
+**Passo a passo, NESTA ordem** (a ordem evita que o Google veja o site fora do
+ar ou apontando para um endereço inexistente):
+
+1. **Registrar o `.com.br`** em https://registro.br, com o CPF ou CNPJ da escola.
+2. **Vercel → Settings → Domains:** adicionar `www.escolabanhoetosarosigiovanella.com.br`
+   (principal) e `escolabanhoetosarosigiovanella.com.br`, redirecionando para o `www`.
+   Configurar no Registro.br os registros que a Vercel mostrar na tela — use os
+   valores exibidos lá, que podem mudar com o tempo.
+3. Aguardar o domínio ficar válido na Vercel e confirmar o site no ar pelo `.com.br`.
+4. **Vercel → Domains:** adicionar também `www.escolabanhoetosarosigiovanella.com`
+   e `escolabanhoetosarosigiovanella.com`, ambos com **redirecionamento
+   permanente (308) para o `.com.br`**.
+5. **Wix → Domínios:** apontar o `.com` para a Vercel, editando os registros DNS
+   com os valores que a Vercel mostrar. **Só depois disso** cancelar o plano
+   do site no Wix — e **manter o domínio `.com` renovando** (vence em
+   12/02/2027): é ele que preserva os links antigos.
+6. **Google Search Console:** verificar os dois domínios, enviar o `sitemap.xml`
+   do `.com.br` e usar **"Mudança de endereço"** do `.com` para o `.com.br`.
+7. **Perfil da Empresa no Google:** trocar o site para o `.com.br`.
+
+**Endereços antigos:** os 56 caminhos do Wix (`/post/…`, `/about-1`,
+`/product-page/…` etc.) têm redirecionamento permanente para a página inicial
+em `vercel.json`. Qualquer outro endereço inexistente mostra a página
+`404.html`, com link para o início e para os cursos.
 
 ---
 

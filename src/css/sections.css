@@ -34,6 +34,17 @@
   margin-bottom: var(--space-sm);
 }
 
+/* Linha de apoio dentro do H1: aparência de "eyebrow", em linha própria. */
+.hero__kicker {
+  display: flex;
+}
+
+/* Bloco próprio: a animação de entrada (transform) não age em elementos
+   inline, e a frase principal precisa começar em nova linha. */
+.hero__headline {
+  display: block;
+}
+
 /* Realce sutil na palavra-chave da headline. */
 .hero__title em {
   font-style: normal;
@@ -503,6 +514,14 @@ a.channel:hover {
   fill: var(--color-white);
 }
 
+/* Rótulo, valor e nota em linhas próprias (são <span>s; lado a lado, o
+   número e a nota se misturavam na mesma linha). */
+.channel__label,
+.channel__value,
+.channel__note {
+  display: block;
+}
+
 .channel__label {
   font-size: var(--step--1);
   font-weight: 700;
@@ -530,6 +549,31 @@ a.channel:hover {
   border-radius: var(--radius-lg);
   padding: var(--space-md);
   box-shadow: var(--shadow-sm);
+}
+
+.form-card__title {
+  margin-bottom: var(--space-2xs);
+}
+
+/* Sem JavaScript: esconde o formulário e mostra o atalho para o WhatsApp.
+   Com JavaScript (classe .js, aplicada antes da primeira pintura), o
+   contrário — sem "piscar". */
+.form__nojs {
+  font-weight: 600;
+}
+
+.js .form__nojs,
+html:not(.js) [data-interest-form] {
+  display: none;
+}
+
+.form-card__intro {
+  margin-bottom: var(--space-md);
+}
+
+/* Botão "Como chegar", abaixo do mapa. */
+.contact__directions {
+  margin-top: var(--space-sm);
 }
 
 @media (min-width: 700px) {
@@ -658,6 +702,27 @@ a.channel:hover {
 .page {
   padding-top: calc(var(--header-height) + var(--space-xl));
   padding-bottom: var(--space-2xl);
+}
+
+/* Página 404: centralizada verticalmente, com logo e dois caminhos. */
+.page--erro {
+  min-height: 100vh;
+  display: grid;
+  align-items: center;
+  padding-top: var(--space-xl);
+}
+
+.page__logo {
+  width: auto;
+  height: 52px;
+  margin-bottom: var(--space-lg);
+}
+
+.page__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs);
+  margin-top: var(--space-md);
 }
 
 .prose h2 {

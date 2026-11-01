@@ -16,8 +16,8 @@ export const SITE = {
   /** Nome comercial usado em textos, schema.org e mensagens de WhatsApp. */
   businessName: 'Giovanella Escola Estética Animal',
 
-  /** Domínio final de produção. TODO: AJUSTAR PARA O DOMÍNIO REAL. */
-  siteUrl: 'https://www.giovanellaesteticaanimal.com.br',
+  /** Domínio final de produção. */
+  siteUrl: 'https://www.escolabanhoetosarosigiovanella.com.br',
 
   contact: {
     /** Telefone formatado para exibição. */

@@ -27,6 +27,8 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         privacidade: resolve(__dirname, 'privacidade.html'),
+        // A Vercel serve /404.html automaticamente para endereços inexistentes.
+        erro404: resolve(__dirname, '404.html'),
       },
     },
   },

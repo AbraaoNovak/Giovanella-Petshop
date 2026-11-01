@@ -97,6 +97,12 @@ a:hover {
   color: var(--color-primary);
 }
 
+/* Endereços sem itálico (padrão do navegador). Antes era um style="" inline
+   em cada <address> — removido para permitir uma CSP estrita. */
+address {
+  font-style: normal;
+}
+
 /* O atributo `hidden` deve SEMPRE esconder. Sem isto, qualquer classe com
    `display` (ex.: .btn usa inline-flex) venceria o estilo padrão do navegador
    e o elemento continuaria aparecendo. */

@@ -6,14 +6,19 @@
     <meta name="theme-color" content="#294908" />
 
     <!-- ==================================================================
-         SEO — TODO: REVISAR TEXTOS APÓS RECEBER CONTEÚDO OFICIAL
+         SEO
+         Termo principal: "escola de estética animal em Joinville" — no
+         título (início), na descrição, no H1 e no Schema.org.
+         Mensagem: formação de profissionais capacitados para atender com
+         excelência. Título com até ~60 caracteres e descrição com até ~155,
+         para não serem cortados nos resultados do Google.
          ================================================================== -->
-    <title>Giovanella Escola Estética Animal | Cursos de Estética Animal em Joinville - SC</title>
+    <title>Escola de Estética Animal em Joinville | Giovanella</title>
     <meta
       name="description"
-      content="Escola de estética animal em Joinville (SC). Cursos de estética animal e banho e tosa, com formação profissional e estrutura preparada. Fale conosco pelo WhatsApp."
+      content="Escola de estética animal em Joinville (SC): 18 cursos presenciais de banho, tosa e especializações. Aulas práticas que formam profissionais de excelência."
     />
-    <link rel="canonical" href="https://www.giovanellaesteticaanimal.com.br/" />
+    <link rel="canonical" href="https://www.escolabanhoetosarosigiovanella.com.br/" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="author" content="Giovanella Escola Estética Animal" />
     <meta name="geo.region" content="BR-SC" />
@@ -25,15 +30,15 @@
     <meta property="og:site_name" content="Giovanella Escola Estética Animal" />
     <meta
       property="og:title"
-      content="Giovanella Escola Estética Animal | Cursos em Joinville - SC"
+      content="Giovanella — Escola de Estética Animal em Joinville"
     />
     <meta
       property="og:description"
-      content="Escola de estética animal em Joinville (SC). Cursos de estética animal e banho e tosa. Fale conosco pelo WhatsApp."
+      content="18 cursos presenciais de banho, tosa e estética animal em Joinville (SC). Aulas práticas para formar profissionais que atendem com excelência."
     />
-    <meta property="og:url" content="https://www.giovanellaesteticaanimal.com.br/" />
+    <meta property="og:url" content="https://www.escolabanhoetosarosigiovanella.com.br/" />
     <!-- Imagem de compartilhamento: gerada por "npm run fotos" a partir da fachada. -->
-    <meta property="og:image" content="https://www.giovanellaesteticaanimal.com.br/img/social/og-image.jpg" />
+    <meta property="og:image" content="https://www.escolabanhoetosarosigiovanella.com.br/img/social/og-image.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Fachada da Giovanella Escola Estética Animal, em Joinville" />
@@ -41,16 +46,9 @@
 
     <!-- Ícones -->
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <!-- TODO: GERAR ÍCONES PNG (apple-touch-icon 180x180) A PARTIR DE UMA VERSÃO QUADRADA DA LOGO -->
+    <!-- Ícone da tela inicial do iPhone: gerado por "npm run fotos". -->
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png" />
 
-    <!-- Fontes: preconnect reduz o custo de handshake; `display=swap` evita
-         texto invisível (FOIT) e protege o LCP. -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
-    />
 
     <!-- ==================================================================
          JAVASCRIPT — ativação progressiva com redes de segurança
@@ -108,10 +106,13 @@
          EducationalOrganization (atividade real) + LocalBusiness (SEO local).
          NÃO reintroduzir tipos de loja/varejo de produtos para animais —
          o cliente pediu explicitamente essa separação.
-         NÃO é usado AggregateRating: o site não possui avaliações reais
-         publicadas e elegíveis.
-         TODO: Adicionar `openingHoursSpecification` e `postalCode` quando
-         as informações oficiais forem fornecidas.
+         NÃO é usado AggregateRating/Review: os depoimentos do site vêm do
+         Google, e avaliações de terceiros não podem ser marcadas como do
+         próprio site (diretrizes do Google).
+         alternateName traz o nome do site anterior, para o Google ligar o
+         novo endereço à reputação já construída.
+         Pendente: horário de funcionamento (openingHoursSpecification),
+         quando a escola informar.
          Os cursos estão no segundo bloco JSON-LD (tipo Course). Ao incluir,
          remover ou alterar um curso no HTML, atualize-o também aqui.
          ================================================================== -->
@@ -121,20 +122,35 @@
         "@graph": [
           {
             "@type": "WebSite",
-            "@id": "https://www.giovanellaesteticaanimal.com.br/#website",
-            "url": "https://www.giovanellaesteticaanimal.com.br/",
+            "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#website",
+            "url": "https://www.escolabanhoetosarosigiovanella.com.br/",
             "name": "Giovanella Escola Estética Animal",
             "inLanguage": "pt-BR",
-            "publisher": { "@id": "https://www.giovanellaesteticaanimal.com.br/#business" }
+            "publisher": { "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business" }
           },
           {
             "@type": ["EducationalOrganization", "LocalBusiness"],
-            "@id": "https://www.giovanellaesteticaanimal.com.br/#business",
+            "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business",
             "name": "Giovanella Escola Estética Animal",
-            "url": "https://www.giovanellaesteticaanimal.com.br/",
-            "logo": "https://www.giovanellaesteticaanimal.com.br/img/Logo-Giovanella.png",
-            "image": "https://www.giovanellaesteticaanimal.com.br/img/Logo-Giovanella.png",
+            "alternateName": ["Escola de Banho e Tosa Rosi Giovanella", "Giovanella"],
+            "description": "Escola de estética animal em Joinville (SC) que forma profissionais de banho, tosa e estética animal capacitados para atender clientes com excelência. Cursos presenciais, com aulas teóricas e práticas e foco no bem-estar animal.",
+            "url": "https://www.escolabanhoetosarosigiovanella.com.br/",
+            "logo": "https://www.escolabanhoetosarosigiovanella.com.br/img/Logo-Giovanella.png",
+            "image": [
+              "https://www.escolabanhoetosarosigiovanella.com.br/img/estrutura/fachada.jpg",
+              "https://www.escolabanhoetosarosigiovanella.com.br/img/destaque/instrutora-em-aula.jpg",
+              "https://www.escolabanhoetosarosigiovanella.com.br/img/Logo-Giovanella.png"
+            ],
             "telephone": "+5547996086955",
+            "hasMap": "https://maps.google.com/?cid=3029923964494888959",
+            "knowsAbout": [
+              "Estética animal",
+              "Banho e tosa",
+              "Tosa à tesoura",
+              "Tosa à máquina",
+              "Tosa de raças",
+              "Bem-estar animal"
+            ],
             "areaServed": {
               "@type": "City",
               "name": "Joinville",
@@ -142,9 +158,10 @@
             },
             "address": {
               "@type": "PostalAddress",
-              "streetAddress": "Rua Elly Soares, 511",
+              "streetAddress": "Rua Elly Soares, 511 - Floresta",
               "addressLocality": "Joinville",
               "addressRegion": "SC",
+              "postalCode": "89211-715",
               "addressCountry": "BR"
             }
           }
@@ -162,13 +179,13 @@
             "inLanguage": "pt-BR",
             "timeRequired": "PT51H",
             "provider": {
-              "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+              "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
             },
             "hasCourseInstance": {
               "@type": "CourseInstance",
               "courseMode": "Onsite",
               "location": {
-                "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+                "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
               }
             }
           },
@@ -179,13 +196,13 @@
             "inLanguage": "pt-BR",
             "timeRequired": "PT36H",
             "provider": {
-              "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+              "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
             },
             "hasCourseInstance": {
               "@type": "CourseInstance",
               "courseMode": "Onsite",
               "location": {
-                "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+                "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
               }
             }
           },
@@ -196,13 +213,13 @@
             "inLanguage": "pt-BR",
             "timeRequired": "PT15H",
             "provider": {
-              "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+              "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
             },
             "hasCourseInstance": {
               "@type": "CourseInstance",
               "courseMode": "Onsite",
               "location": {
-                "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+                "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
               }
             }
           },
@@ -213,13 +230,13 @@
             "inLanguage": "pt-BR",
             "timeRequired": "PT15H",
             "provider": {
-              "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+              "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
             },
             "hasCourseInstance": {
               "@type": "CourseInstance",
               "courseMode": "Onsite",
               "location": {
-                "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+                "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
               }
             }
           },
@@ -230,13 +247,13 @@
             "inLanguage": "pt-BR",
             "timeRequired": "PT9H",
             "provider": {
-              "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+              "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
             },
             "hasCourseInstance": {
               "@type": "CourseInstance",
               "courseMode": "Onsite",
               "location": {
-                "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+                "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
               }
             }
           },
@@ -247,13 +264,13 @@
             "inLanguage": "pt-BR",
             "timeRequired": "PT6H",
             "provider": {
-              "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+              "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
             },
             "hasCourseInstance": {
               "@type": "CourseInstance",
               "courseMode": "Onsite",
               "location": {
-                "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+                "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
               }
             }
           },
@@ -264,13 +281,13 @@
             "inLanguage": "pt-BR",
             "timeRequired": "PT6H",
             "provider": {
-              "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+              "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
             },
             "hasCourseInstance": {
               "@type": "CourseInstance",
               "courseMode": "Onsite",
               "location": {
-                "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+                "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
               }
             }
           },
@@ -281,13 +298,13 @@
             "inLanguage": "pt-BR",
             "timeRequired": "PT6H",
             "provider": {
-              "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+              "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
             },
             "hasCourseInstance": {
               "@type": "CourseInstance",
               "courseMode": "Onsite",
               "location": {
-                "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+                "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
               }
             }
           },
@@ -298,13 +315,13 @@
             "inLanguage": "pt-BR",
             "timeRequired": "PT6H",
             "provider": {
-              "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+              "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
             },
             "hasCourseInstance": {
               "@type": "CourseInstance",
               "courseMode": "Onsite",
               "location": {
-                "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+                "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
               }
             }
           },
@@ -315,13 +332,13 @@
             "inLanguage": "pt-BR",
             "timeRequired": "PT6H",
             "provider": {
-              "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+              "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
             },
             "hasCourseInstance": {
               "@type": "CourseInstance",
               "courseMode": "Onsite",
               "location": {
-                "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+                "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
               }
             }
           },
@@ -332,13 +349,13 @@
             "inLanguage": "pt-BR",
             "timeRequired": "PT3H",
             "provider": {
-              "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+              "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
             },
             "hasCourseInstance": {
               "@type": "CourseInstance",
               "courseMode": "Onsite",
               "location": {
-                "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+                "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
               }
             }
           },
@@ -349,13 +366,13 @@
             "inLanguage": "pt-BR",
             "timeRequired": "PT6H",
             "provider": {
-              "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+              "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
             },
             "hasCourseInstance": {
               "@type": "CourseInstance",
               "courseMode": "Onsite",
               "location": {
-                "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+                "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
               }
             }
           },
@@ -366,13 +383,13 @@
             "inLanguage": "pt-BR",
             "timeRequired": "PT3H",
             "provider": {
-              "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+              "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
             },
             "hasCourseInstance": {
               "@type": "CourseInstance",
               "courseMode": "Onsite",
               "location": {
-                "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+                "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
               }
             }
           },
@@ -383,13 +400,13 @@
             "inLanguage": "pt-BR",
             "timeRequired": "PT6H",
             "provider": {
-              "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+              "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
             },
             "hasCourseInstance": {
               "@type": "CourseInstance",
               "courseMode": "Onsite",
               "location": {
-                "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+                "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
               }
             }
           },
@@ -400,13 +417,13 @@
             "inLanguage": "pt-BR",
             "timeRequired": "PT3H",
             "provider": {
-              "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+              "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
             },
             "hasCourseInstance": {
               "@type": "CourseInstance",
               "courseMode": "Onsite",
               "location": {
-                "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+                "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
               }
             }
           },
@@ -417,13 +434,13 @@
             "inLanguage": "pt-BR",
             "timeRequired": "PT3H",
             "provider": {
-              "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+              "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
             },
             "hasCourseInstance": {
               "@type": "CourseInstance",
               "courseMode": "Onsite",
               "location": {
-                "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+                "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
               }
             }
           },
@@ -434,13 +451,13 @@
             "inLanguage": "pt-BR",
             "timeRequired": "PT6H",
             "provider": {
-              "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+              "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
             },
             "hasCourseInstance": {
               "@type": "CourseInstance",
               "courseMode": "Onsite",
               "location": {
-                "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+                "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
               }
             }
           },
@@ -451,13 +468,13 @@
             "inLanguage": "pt-BR",
             "timeRequired": "PT6H",
             "provider": {
-              "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+              "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
             },
             "hasCourseInstance": {
               "@type": "CourseInstance",
               "courseMode": "Onsite",
               "location": {
-                "@id": "https://www.giovanellaesteticaanimal.com.br/#business"
+                "@id": "https://www.escolabanhoetosarosigiovanella.com.br/#business"
               }
             }
           }
@@ -587,10 +604,16 @@
       <section class="hero" id="inicio" aria-labelledby="hero-title">
         <div class="container hero__grid">
           <div>
-            <p class="section__eyebrow" data-reveal>Joinville · Santa Catarina</p>
-
-            <h1 class="hero__title" id="hero-title" data-reveal>
-              Formação profissional em <em>estética animal</em> com cuidado de verdade
+            <!-- A linha de apoio fica DENTRO do H1: assim o termo principal
+                 ("escola de estética animal" + "Joinville") faz parte do título
+                 da página para o Google, sem mudar o visual. -->
+            <h1 class="hero__title" id="hero-title">
+              <span class="section__eyebrow hero__kicker" data-reveal
+                >Escola de Estética Animal · Joinville/SC</span
+              >
+              <span class="hero__headline" data-reveal
+                >Formação profissional em <em>estética animal</em> com cuidado de verdade</span
+              >
             </h1>
 
             <!-- Subtítulo: só afirmações comprováveis pelos pôsteres dos cursos
@@ -1783,7 +1806,7 @@
                   </span>
                   <span>
                     <span class="channel__label">Endereço</span>
-                    <address class="channel__value" style="font-style: normal">
+                    <address class="channel__value">
                       Rua Elly Soares, 511
                     </address>
                     <span class="channel__note">Bairro Floresta · Joinville - SC</span>
@@ -1804,7 +1827,7 @@
                 </button>
               </div>
 
-              <p style="margin-top: var(--space-sm)">
+              <p class="contact__directions">
                 <a
                   class="btn btn--secondary"
                   data-directions
@@ -1817,14 +1840,28 @@
 
             <!-- ---------- Formulário de interesse ---------- -->
             <div class="form-card" data-reveal>
-              <h3 style="margin-bottom: var(--space-2xs)">Prefere organizar antes de chamar?</h3>
-              <p class="channel__note" style="margin-bottom: var(--space-md)">
+              <h3 class="form-card__title">Prefere organizar antes de chamar?</h3>
+              <p class="channel__note form-card__intro">
                 Preencha os campos e o WhatsApp abrirá com sua mensagem pronta.
               </p>
 
               <!-- `novalidate`: a validação é feita em JS para exibir mensagens
                    acessíveis e consistentes em todos os navegadores. -->
-              <form class="form" data-interest-form novalidate>
+              <!-- Sem JavaScript o formulário não consegue abrir o WhatsApp.
+                   Ele fica oculto (CSS: html:not(.js)) e este aviso aparece
+                   no lugar — evitando que nome e telefone fossem enviados na
+                   URL pelo envio padrão do navegador. -->
+              <p class="form__nojs">
+                Para enviar sua mensagem,
+                <a href="https://wa.me/5547996086955" target="_blank" rel="noopener noreferrer"
+                  >fale com a gente direto pelo WhatsApp</a
+                >.
+              </p>
+
+              <!-- method="post": se o formulário for enviado sem o JS, os dados
+                   não vão para a URL (histórico, logs). A CSP ainda bloqueia o
+                   envio de vez (form-action 'none' em vercel.json). -->
+              <form class="form" data-interest-form method="post" novalidate>
                 <div class="field">
                   <label class="field__label" for="form-nome">
                     Nome <span class="field__required" aria-hidden="true">*</span>
@@ -2252,7 +2289,7 @@
 
           <div>
             <h2 class="footer__title">Endereço</h2>
-            <address class="footer__list" style="font-style: normal">
+            <address class="footer__list">
               Rua Elly Soares, 511<br />
               Bairro Floresta<br />
               Joinville - SC, Brasil

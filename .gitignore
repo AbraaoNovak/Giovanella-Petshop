@@ -7,3 +7,5 @@ dist/
 Thumbs.db
 *.log
 .vite/
+# Capturas de tela geradas por npm run capturas
+capturas/

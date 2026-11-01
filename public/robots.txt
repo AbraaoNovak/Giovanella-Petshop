@@ -2,5 +2,4 @@
 User-agent: *
 Allow: /
 
-# TODO: AJUSTAR PARA O DOMÍNIO REAL DE PRODUÇÃO
-Sitemap: https://www.giovanellaesteticaanimal.com.br/sitemap.xml
+Sitemap: https://www.escolabanhoetosarosigiovanella.com.br/sitemap.xml

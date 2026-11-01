@@ -10,14 +10,19 @@
     "preview": "vite preview",
     "test": "node scripts/test-whatsapp.mjs && node scripts/test-paws.mjs && node scripts/test-env.mjs",
     "fotos": "node scripts/otimizar-fotos.mjs",
-    "test:navegadores": "vite build && node scripts/test-navegadores.mjs"
+    "test:navegadores": "vite build && node scripts/test-navegadores.mjs",
+    "test:seguranca": "vite build && node scripts/test-seguranca.mjs",
+    "capturas": "vite build && node scripts/capturas.mjs"
   },
   "devDependencies": {
-    "sharp": "^0.34.5",
-    "vite": "^5.4.10"
+    "sharp": "^0.35.5",
+    "vite": "^6.4.5"
   },
   "browserslist": [
     "defaults",
     "not IE 11"
-  ]
+  ],
+  "dependencies": {
+    "@fontsource-variable/inter": "^5.3.0"
+  }
 }

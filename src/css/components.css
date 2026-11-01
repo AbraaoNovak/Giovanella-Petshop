@@ -1080,3 +1080,9 @@ textarea.field__control {
   font-size: var(--step--1);
   color: var(--color-text-on-dark-muted);
 }
+
+/* Rodapé reduzido (página de privacidade): sem a divisória superior. */
+.footer__bottom--solo {
+  margin-top: 0;
+  border-top: 0;
+}

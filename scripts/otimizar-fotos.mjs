@@ -123,6 +123,21 @@ async function gerarImagemSocial() {
   return 'social/og-image  1200x630 (apenas JPEG: redes sociais não leem WebP de forma confiável)';
 }
 
+/**
+ * Ícone da tela inicial do iPhone/iPad (apple-touch-icon), a partir do
+ * favicon. Fundo verde chapado: o iOS pinta de PRETO as áreas transparentes
+ * (os cantos arredondados do favicon); ele mesmo aplica o arredondamento.
+ */
+async function gerarIconeApple() {
+  const saida = join(DESTINO, 'apple-touch-icon.png');
+  await sharp(join(RAIZ, 'public', 'favicon.svg'), { density: 300 })
+    .resize(180, 180)
+    .flatten({ background: '#294908' })
+    .png({ compressionLevel: 9 })
+    .toFile(saida);
+  return 'apple-touch-icon  180x180 (PNG, sem transparência)';
+}
+
 /* ---------------------------------------------------------------------------
    Processamento
    --------------------------------------------------------------------------- */
@@ -179,5 +194,6 @@ for (const tarefa of TAREFAS) {
   resultados.push(...(await processar(tarefa)));
 }
 resultados.push(await gerarImagemSocial());
+resultados.push(await gerarIconeApple());
 console.log(resultados.join('\n'));
 console.log(`\n${resultados.length} imagens geradas em public/img/ (cada uma em WebP + fallback).`);
